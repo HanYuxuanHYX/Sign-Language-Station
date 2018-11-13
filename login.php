@@ -1,7 +1,4 @@
 <?php
-if(isset($_COOKIE["username"]))
-	header("Location: profile.php");
-else{
 	if(isset($_POST["login"])){
 		$username = $_POST["username"];
 		$password = $_POST["password"];
@@ -9,9 +6,10 @@ else{
 			echo "<script>alert('User name is empty!')</script>";
 		}
 		else if(empty($password)){
-			echo "<script>alert('Email address is empty!')</script>";
+			echo "<script>alert('Password is empty!')</script>";
 		}
 		else{
+			
 			$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
 			mysqli_select_db($db,"18012633x");
 			$sql = "SELECT * FROM member WHERE password='" . 
@@ -32,7 +30,6 @@ else{
 				echo "<script>alert('Username/email address or password is incorrect')</script>";
 
 		}
-	}
 }
 ?>
 
