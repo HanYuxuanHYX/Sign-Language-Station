@@ -4,7 +4,7 @@
 		  	<li><a href="index.php">Main Page</a></li>
 		  	<li><a href="glossary.php">Vocabulary List</a></li>
   			<li><a href="upload.php">Upload Vocabulary</a></li>
-  			<li><a href="payment.php">Subscription</a></li>
+  			<li><a href="subscriptionPlan.php">Subscription</a></li>
   			<li><a class="dropDown">Account Functions</a>
   				<div class="dropDownContent" style="display: none;">
   					<ul>
