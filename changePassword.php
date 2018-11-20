@@ -14,7 +14,7 @@ if(isset($_POST["change"])){
 	$subject = "[Sign Language Station] confirm to reset the password";
 	$body = "<h1>resetPassword</h1><br>
     <h2>Please click on the button below to reset your password:</h2><br>
-			<h3>http://www2.comp.polyu.edu.hk/~18012633x/SL/scripts/confirmChangePassword.php?token=" . $token . "</h3>";
+			<h3>http://www2.comp.polyu.edu.hk/~18012633x/SL_EN/scripts/confirmChangePassword.php?token=" . $token . "</h3>";
 	sendEmail($email,$subject,$body);
 	header("Location: changePasswordSuccess.php");
 }

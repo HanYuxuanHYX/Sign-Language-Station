@@ -20,7 +20,7 @@ $(document).ready(function(){
 	<div class="mainFrame">
 		<h1>You have only one step left!<br></h1>
 	  	<h2>Please confirm the email address you input for signing up, click on the link in your email to finish signing up<br></h2>
-	  	Didnnot receive email？ Click on <a href="scripts/resendEmail.php"></a>for resending.
+	  	Haven't received an email? Click <a href="scripts/resendEmail.php">here</a> for resending.
 	</div>
 	
 	<?php require('footer.php');?>
