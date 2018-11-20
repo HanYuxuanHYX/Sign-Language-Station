@@ -127,6 +127,7 @@ function check(){
 			<table>
             	<tr>
                 	<td colspan="2"><span style="color: red">You must fill in every column！</span></td>
+                </tr>
 				<tr>
 					<td><label for="username">username:</label></td>
           			<td><input type="text" name="username" id="username">

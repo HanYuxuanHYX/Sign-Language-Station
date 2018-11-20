@@ -26,19 +26,19 @@ $(document).ready(function(){
 		<table>
 	  <tbody>
 	    <tr>
-	      <td>username</td>
+	      <td><strong>username</strong></td>
 	      <td><?php echo $_COOKIE["username"]?></td>
         </tr>
 	    <tr>
-	      <td>email address</td>
+	      <td><strong>email address</strong></td>
 	      <td><?php echo $_COOKIE["email"]?></td>
         </tr>
 	    <tr>
-	      <td>sign up date</td>
+	      <td><strong>sign up date</strong></td>
 	      <td><?php echo $_COOKIE["registerDate"]?></td>
         </tr>
         <tr>
-	      <td>remained subscription time</td>
+	      <td><strong>remained subscription time</strong></td>
 	      <td><?php echo $_COOKIE["daysLeft"]?></td>
 	      <td><a href="payment.php">make a subscription</a></td>
         </tr>

@@ -5,6 +5,11 @@
 	}
 	
 	$content = $_GET["content"];
+	if($content == ""){
+		header("Location: index.php");
+		exit;
+	}
+	
 	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
 	mysqli_select_db($db,"18012633x");
 	$sql = "SELECT * FROM vocabulary WHERE vocabName ='" . $content . "' AND status='approved'";

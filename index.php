@@ -25,6 +25,7 @@ $(document).ready(function(){
 function DropDown(){
 	$(".dropDownContent").slideToggle("fast");
 };
+
 </script>
 </head>
 
@@ -34,7 +35,7 @@ function DropDown(){
 	<div class="search">
         <img id ="pic1" src = "img/sl_new.png" /><br>
 	  	<form id="form1" name="form1" method="get" action="vocabInfo.php">
-	  	<input type="text" list="searchList" name="content" placeholder="search..."> 
+	  	<input type="text" list="searchList" name="content" id="content" placeholder="search..."> 
         <datalist id="searchList">
         </datalist>
 	  	<input type="submit" name="submit" id="submit" value="search">
