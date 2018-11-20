@@ -1,8 +1,7 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="top_bottom_list.css"/>
+<link rel="stylesheet" type="text/css" href="css/general.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -24,7 +23,6 @@ td {
     border-color: red;
     font: 18px fantasy;
     height: 200px
-
 }
 th {
     color: red;
@@ -54,24 +52,25 @@ h1.round{
     transition-duration: 0.6s;
     cursor: pointer;
 }
-
-
 .button1 {
     background-color: white; 
     color: red; 
     border: 2px solid #f44336;
     font: 40px fantasy;
 }
-
 .button1:hover {
     background-color: #f44336;
     color: white;
 }
-
-
 </style>
 </head>
 <?php
+
+if(!isset($_COOKIE["username"])){
+	header("Location: login.php");
+	exit;
+}
+
 session_start();
 $servername = "sdmysql.comp.polyu.edu.hk";
 $username = "18012633x";
@@ -84,7 +83,6 @@ if (!$conn) {
     die("Connection failed: " . mysql_connect_error());
 }
 mysql_select_db($dbname, $conn);
-
 $sql1 = "SELECT price
 FROM subscriptionplan
 WHERE planId=1;";
@@ -171,5 +169,3 @@ if (mysql_num_rows($result3) > 0) {
 
 </body>
 </html>
-
-

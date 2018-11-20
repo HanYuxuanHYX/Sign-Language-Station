@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8">
 <title>Sign Language Station</title>
-<link rel="stylesheet" type="text/css" href="top_bottom_list.css"/>
+<link rel="stylesheet" type="text/css" href="css/general.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -23,11 +23,11 @@ $(document).ready(function(){
 	<?php require('header.php');?>
 	
 	<div class="mainFrame">
-		<table width="600" border="0">
+		<table>
 	  <tbody>
 	    <tr>
-	      <td width="180">username</td>
-	      <td width="240"><?php echo $_COOKIE["username"]?></td>
+	      <td>username</td>
+	      <td><?php echo $_COOKIE["username"]?></td>
         </tr>
 	    <tr>
 	      <td>email address</td>
@@ -43,7 +43,7 @@ $(document).ready(function(){
 	      <td><a href="payment.php">make a subscription</a></td>
         </tr>
 	    <tr>
-	      <td height="50"><a href="changePassword.php">change password</a></td>
+	      <td><a href="changePassword.php">change password</a></td>
 	      <td><a href="logout.php">log out</a></td>
         </tr>
       </tbody>

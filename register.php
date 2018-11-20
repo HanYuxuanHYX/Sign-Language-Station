@@ -39,7 +39,7 @@ if(isset($_POST["register"])){
 <head>
 <meta charset="utf-8">
 <title>Sign Language Station</title>
-<link rel="stylesheet" type="text/css" href="top_bottom_list.css"/>
+<link rel="stylesheet" type="text/css" href="css/general.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -123,18 +123,19 @@ function check(){
 	<?php require('header.php');?>
 
 	<div class="mainFrame">
-		<span style="color: red">You must fill in every column！</span>
 	  	<form id="form1" name="form1" method="post" onSubmit="return check();">
-			<table width="100%" border="0" cellspacing="5" cellpadding="8">
+			<table>
+            	<tr>
+                	<td colspan="2"><span style="color: red">You must fill in every column！</span></td>
 				<tr>
-					<td width="100"><label for="username">username:</label></td>
+					<td><label for="username">username:</label></td>
           			<td><input type="text" name="username" id="username">
           				<span style="color: red"></span>
           			</td>
 				</tr>
 
 				<tr>
-					<td width="100"><label for="email">email:</label></td>
+					<td><label for="email">email:</label></td>
 					<td><input type="email" name="email" id="email">
 						<span style="color: red"></span>
 					</td>
@@ -142,7 +143,7 @@ function check(){
 				</tr>
 
 				<tr>
-					<td width="100"><label for="password">password:</label></td>
+					<td><label for="password">password:</label></td>
 					<td><input type="password" name="password" id="password">
 						<span style="color: red"></span>
 					</td>
@@ -150,7 +151,7 @@ function check(){
 				</tr>
 
 				<tr>
-					<td width="100"><label for="confirm">confimPassword:</label></td>
+					<td><label for="confirm">confimPassword:</label></td>
 					<td><input type="password" name="confirm" id="confirm">
 						<span style="color: red"></span>
 					</td>
@@ -158,7 +159,7 @@ function check(){
 				</tr>
 				
 				<tr>
-					<td width="100"><label for="birthday">birthday:</label></td>
+					<td><label for="birthday">birthday:</label></td>
 					<td><input type="date" name="birthday" id="birthday">
 						<span style="color: red"></span>
 					</td>
@@ -167,12 +168,12 @@ function check(){
 
 				
 				<tr>
-					<td width="100"><label for="disability">disability:</label></td>
+					<td><label for="disability">disability:</label></td>
 					<td><select name="disability" id="disability">
-						<option value="hearingDisability">hearhearingDisability</option>
-						<option value="speakingDisability">spspeakingDisability</option>
+						<option value="hearingDisability">hearing disability</option>
+						<option value="speakingDisability">speaking disability</option>
 						<option value="both">both</option>
-						<option value="neither">neineither</option>
+						<option value="neither">neither</option>
 						</select>
 						<span style="color: red"></span>
 					</td>					

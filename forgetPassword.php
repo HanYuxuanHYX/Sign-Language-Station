@@ -26,7 +26,7 @@ if(isset($_POST["change"])){
 <head>
 <meta charset="utf-8">
 <title>Sign Language Station</title>
-<link rel="stylesheet" type="text/css" href="top_bottom_list.css"/>
+<link rel="stylesheet" type="text/css" href="css/general.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -57,9 +57,9 @@ function check(){
 
 	<div class="mainFrame">
 	  	<form id="form1" name="form1" method="post" onSubmit="return check();">
-			<table width="100%" border="0" cellspacing="5" cellpadding="8">
+			<table>
 				<tr>
-                    <td width="150"><label for="email">Please input your email address:</label></td>
+                    <td><label for="email">Please input your email address:</label></td>
           			<td><input type="text" name="email" id="email">
                     	<span style="color: red"></span>
                     </td>

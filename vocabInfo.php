@@ -1,4 +1,9 @@
 <?php
+	if(!isset($_COOKIE["username"])){
+		header("Location: login.php");
+		exit;
+	}
+	
 	$content = $_GET["content"];
 	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
 	mysqli_select_db($db,"18012633x");
@@ -15,7 +20,7 @@
 		
 	$sql2 = "UPDATE vocabulary SET checkTotal=checkTotal+1 WHERE vocabId='" . $vocabId . "'";
 	mysqli_query($db,$sql2) or die("SQL error!<br>");
-	$sql3 = "INSERT INTO checkinghistory(email,vocabId,checkTime) VALUES('" . $_COOKIE['email'] . "','" . $vocabId . "','" . date('Y-m-d') . "')";
+	$sql3 = "INSERT INTO checkinghistory(email,vocabId,vocabName,checkTime) VALUES('" . $_COOKIE['email'] . "','" . $vocabId . "','" . $vocabName . "','" . date('Y-m-d') . "')";
 	mysqli_query($db,$sql3) or die("SQL error!<br>");	
 	$sql4 = "SELECT * FROM addingtoglossaryhistory WHERE vocabId='" . $vocabId . "' AND email='" . $_COOKIE['email'] . "'";
 	$result2 = mysqli_query($db,$sql4) or die("SQL error!<br>");
@@ -33,7 +38,7 @@
 <head>
 <meta charset="utf-8">
 <title>Sign Language Station</title>
-<link rel="stylesheet" type="text/css" href="top_bottom_list.css"/>
+<link rel="stylesheet" type="text/css" href="css/general.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -52,9 +57,13 @@ $(document).ready(function(){
 
 function add(){
 	$.post("scripts/addToGlossary.php",
-        {vocabId:<?php echo $vocabId?>},
-        function(data,status){});
-	location.reload();
+        {
+			vocabId:<?php echo $vocabId?>,
+			vocabName: "<?php echo $vocabName?>"
+		},
+        function(data,status){
+			$("#addToGlossary").text("Added");
+		});
 }
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
@@ -66,30 +75,31 @@ function add(){
     	<h1><?php echo $vocabName;?></h1>
     	<table width="100%" border="0" cellspacing="5" cellpadding="8">
 			<tr>
-				<td width="100">Uploader:</td>
+				<td>Uploader:</td>
           		<td width="2000"><?php echo $submitter;?></td>
 			</tr>
 
 			<tr>
-				<td width="100">auditor:</td>
+				<td>auditor:</td>
        			<td><?php echo $approver;?></td>
 			</tr>
 
 			<tr>
-				<td width="100">description:</td>
+				<td>description:</td>
        			<td><?php echo $description;?></td>
 			</tr>
 
 			<tr>
-				<td width="100">checkTotal:</td>
+				<td>checkTotal:</td>
        			<td><?php echo $checkTotal;?></td>
 			</tr>
 		</table>
             
-        <video width="400" height="400" controls>
+        <video width="600" height="600" controls>
  		 <source src="<?php echo $videoSource;?>" type="video/mp4">
-		</video><br>
+		</video><br><br>
         
+        <div id="addToGlossary">
         <?php 
 			if($alreadyAddToGlossary){
 				echo "Added";
@@ -97,6 +107,7 @@ function add(){
 				echo "<a href='javascript:add()'>Add to my vocabulary list!</a>";
 			}
 		?>
+        </div>
 	</div>
 	
 	<?php require('footer.php');?>

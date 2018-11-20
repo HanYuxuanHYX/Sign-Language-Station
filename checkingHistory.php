@@ -1,18 +1,20 @@
 <?php
-	if(!isset($_COOKIE["username"]))
+	if(!isset($_COOKIE["username"])){
 		header("Location: login.php");
+		exit;
+	}
 		
 	$vocabIdArray = [];
 	$vocabNameArray = [];
-	$addTimeArray = [];
+	$checkTimeArray = [];
 	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
 	mysqli_select_db($db,"18012633x");
-	$sql = "SELECT * FROM addingtoglossaryhistory WHERE email ='" . $_COOKIE["email"] . "'";
+	$sql = "SELECT * FROM checkinghistory WHERE email ='" . $_COOKIE["email"] . "'";
 	$result = mysqli_query($db,$sql) or die("SQL error!<br>");
 	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 		array_push($vocabIdArray,$row['vocabId']);
 		array_push($vocabNameArray,$row['vocabName']);
-		array_push($addTimeArray,$row['addTime']);
+		array_push($checkTimeArray,$row['checkTime']);
 	}
 ?>
 
@@ -38,24 +40,21 @@ $(document).ready(function(){
 		<table>
 		  <tbody>
           	<tr>
-            	<td><b>Vocabulary Id</b></td>
-                <td><b>Vocabulary Name</b></td>
-                <td><b>Added Time</b></td>
-                <td><b>Drop Vocabularies</b></td>
+            	<td><b>vocabId</b></td>
+                <td><b>vocabName</b></td>
+                <td><b>checkTime</b></td>
             </tr>
           	<?php
 				$i = 0;
 				$count = count($vocabIdArray);
             	for($i=0;$i<$count;$i++)
 				{
-					echo "<tr><td>" . $vocabIdArray[$i] . "</td>
-					<td><a href='vocabInfo.php?content=" . $vocabNameArray[$i] . "'>" . $vocabNameArray[$i] . "</a></td>
-					<td>" . $addTimeArray[$i] . "</td>
-					<td><a href='scripts/dropVocab.php?vocabId=" . $vocabIdArray[$i] . "'>drop</a></td></tr>";
+					echo "<tr><td>" . $vocabIdArray[$i] . "</td><td><a href='vocabInfo.php?content=" . $vocabNameArray[$i] . "'>" . $vocabNameArray[$i] . "</a></td><td>" . $checkTimeArray[$i] . "</td><td></tr>";
 				}
 			?>
           </tbody>
          </table>
+         <a href="scripts/clearCheckingHistory.php">clear my searching history</a>
 	</div>
 	
 	<?php require('footer.php');?>
