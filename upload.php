@@ -2,9 +2,11 @@
 	if(!isset($_COOKIE["username"]))
 		header("Location: login.php");
 	if(isset($_POST["submit"])){
+		if($_FILES["file"]["name"]){
 		if ($_FILES["file"]["error"] > 0){
     		echo "Error：" . $_FILES["file"]["error"] . "<br>";
 		}
+		
 		move_uploaded_file($_FILES["file"]["tmp_name"], "videos/upload/" . $_FILES["file"]["name"]);
 		/*interaction with database*/
 		$submitter = $_COOKIE["email"];
@@ -22,17 +24,22 @@
 		}
 		mysqli_select_db($db,"18012633x");
 		$sql = "insert into vocabulary(submitter,approver,status,vocabName,description,videoSource,checkTotal,addTotal)
-		values('$submitter','1767182376@qq.com','unapproved','$fileName','$description','videos/upload/','0','0')";
+		values('$submitter','1767182376@qq.com','unapproved','$fileName','$description','videos/upload/$fileName_post','0','0')";
 		if(mysqli_query($db,$sql)){
 			echo "<script>alert('Video uploaded successfully!')</script>";
 
 		} else {
     		echo "Error: " . $sql . "<br>" . mysqli_error($db);
 		}
-		
-		
-		
 		mysqli_close($db);
+		}
+		else{
+			echo "<script>alert('You upload nothing!')</script>";
+		}
+		
+		
+		
+		
 		
 		
 		
