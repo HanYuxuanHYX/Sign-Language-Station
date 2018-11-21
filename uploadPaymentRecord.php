@@ -1,6 +1,24 @@
+<?php require('header.php');?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sign Language Station</title>
+<link rel="stylesheet" type="text/css" href="top_bottom_list.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$(".dropDown").click(function(){
+    	$(".dropDownContent").slideToggle("slow");
+    });
+})
+</script>
+</head>
+<body>
 <?php 
 session_start();
 require_once 'connect_db.php';
+
 if(!isset($_COOKIE["username"]) && !isset($_COOKIE["email"]) )
 		header("Location: login.php");
 	
@@ -11,76 +29,72 @@ $nameOfCard = $_POST['nameoncard'];
 $expiryDate = $_POST['expirydate']. "-01" ;
 $secuirtyCode = $_POST['secuirtycode'];
 $cardType = $_POST['cardtype'];
-$updateCreditCardQuery = "REPLACE INTO creditCardInfo (cardNumber, cardType, cardOwnerName, expiryDate , securityCode) values (?,?,?,?,?);";
-if($stmt = mysqli_prepare($link, $updateCreditCardQuery))
+
+
+
+
+
+
+try
 {
-	mysqli_stmt_bind_param($stmt, "isssi", $cardNumber, $cardType,  $nameOfCard , $expiryDate, $secuirtyCode);
+	$insertCreditCardRecord = "REPLACE INTO creditCardInfo (cardNumber, cardType, cardOwnerName, expiryDate , securityCode) values (?,?,?,?,?);";
+	$submitPayment = "INSERT INTO payment (email, planId, paymentPrice, cardNumber ,paymentTime ) values (?,?,?,?, NOW());";
+	$updateDayLeft = "UPDATE member AS m, (SELECT month FROM subscriptionplan WHERE planId = ? ) AS m2  SET m.daysLeft = m.daysLeft + (m2.month * 31)  WHERE m.email = ?; ";
+	
+	if($stmt = mysqli_prepare($link, $insertCreditCardRecord))
+	{
+		mysqli_stmt_bind_param($stmt, "isssi", $cardNumber, $cardType,  $nameOfCard , $expiryDate, $secuirtyCode );
+	
+		mysqli_stmt_execute($stmt);
+	
+		mysqli_stmt_close($stmt);
+	}else
+	{
+		throw new Exception('Cannot insert or modify credit card information.');
+	}
+	
+	if($stmt = mysqli_prepare($link, $submitPayment))
+	{
+	mysqli_stmt_bind_param($stmt, "ssss",  $_COOKIE["email"], $planID ,$price, $cardNumber );
 	
 	mysqli_stmt_execute($stmt);
 	
 	mysqli_stmt_close($stmt);
-	
-	
-	$updatePaymentQuery = "INSERT INTO payment (email, planId, paymentPrice, cardNumber ,paymentTime ) values (?,?,?,?, NOW());";
-	if($stmt2 = mysqli_prepare($link, $updatePaymentQuery))
-	{
-		mysqli_stmt_bind_param($stmt2, "ssds", $_COOKIE["email"], $planID, $price , $cardNumber );
-	
-		mysqli_stmt_execute($stmt2);
-	   
-		mysqli_stmt_close($stmt2);
-		
-		$selectMonth = "SELECT month FROM subscriptionplan WHERE planId=? ;";
-		if($stmt3 = mysqli_prepare($link, $selectMonth))
-		{
-	
-			mysqli_stmt_bind_param($stmt3, 's', $planID );
-	
-			mysqli_stmt_execute($stmt3);
-	
-			mysqli_stmt_bind_result($stmt3, $month);
-	
-			while (mysqli_stmt_fetch($stmt3)) {
-				$planMonth = $month;
-			}
-	
-			mysqli_stmt_close($stmt3);
-			
-			
-			$newTimeLeft = intval($planMonth) * 31;
-			
-			$updateTimeLeftQuery = "UPDATE member SET daysLeft=daysLeft+? WHERE email=? AND title='subscribedUser';";
-			if($stmt4 = mysqli_prepare($link, $updateTimeLeftQuery))
-			{
-		
-				mysqli_stmt_bind_param($stmt4,"is",$newTimeLeft, $_COOKIE["email"]);
-	
-				mysqli_stmt_execute($stmt4);
-	
-				mysqli_stmt_close($stmt4);
-				
-				echo "<script>alert('Your payment record is created. \nEnjory Learning Sign Language.')</script>";
-	
-			}else 
-			{
-				echo "Server Error, Please contact with our administrator. ";
-			}
-				
-	
-		}else 
-		{
-			echo "Server Error, Please contact with our administrator. ";
-		}
-	
 	}else
 	{
-		echo "There is a server error. Please try it again.";
+		throw new Exception('Cannot insert new payment record');
+	}
+	
+	if($stmt = mysqli_prepare($link, $updateDayLeft))
+	{
+		mysqli_stmt_bind_param($stmt, "ss", $planID , $_COOKIE["email"] );
+	
+		mysqli_stmt_execute($stmt);
+	
+		mysqli_stmt_close($stmt);
+	}else
+	{
+		throw new Exception('Cannot update day left.');
 	}
 	
 	
-}else 
-{
-echo "The server cannot process your payment.\nPlease try it again or connect with our administrator. ";
+	
+	
+	echo "Your payment record is created. \nEnjory Learning Sign Language.";
+	
+	
+	
+} catch(Exception $e) {
+	echo "The server cannot process your payment.\nPlease try it again or connect with our administrator. ";
+	mysqli_rollback($link);
 }
+
+
 mysqli_close($link);
 ?>
+	<?php require('footer.php');?>
+</body>
+</html>
+
+
+
