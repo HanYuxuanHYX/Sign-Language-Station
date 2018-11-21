@@ -4,11 +4,9 @@
 <link rel="stylesheet" type="text/css" href="css/general.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-    $(".dropDown").click(function(){
-        $(".dropDownContent").slideToggle("slow");
-    });
-})
+function DropDown(){
+	$(".dropDownContent").slideToggle("fast");
+};
 </script>
 <style>
 table {
@@ -124,7 +122,7 @@ if (mysql_num_rows($result3) > 0) {
 <h3><center>Choose Your Own Plan for 30% off.</center></h3>
 <p><center>Discont only avalibale for Today!!!</center></p>
 
-<table style="width:100%">
+<table class="defaultTable">
   <tr>
     <th>Plan 1</th>
     <th>Plan 2</th> 

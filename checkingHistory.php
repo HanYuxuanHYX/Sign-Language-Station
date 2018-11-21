@@ -26,18 +26,16 @@
 <link rel="stylesheet" type="text/css" href="css/general.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-	$(".dropDown").click(function(){
-    	$(".dropDownContent").slideToggle("slow");
-    });
-})
+function DropDown(){
+	$(".dropDownContent").slideToggle("fast");
+};
 </script>
 </head>
 <body>
 	<?php require('header.php');?>
 	
 	<div class="mainFrame">
-		<table>
+		<table class="defaultTable">
 		  <tbody>
           	<tr>
             	<td><b>vocabId</b></td>
@@ -49,7 +47,9 @@ $(document).ready(function(){
 				$count = count($vocabIdArray);
             	for($i=0;$i<$count;$i++)
 				{
-					echo "<tr><td>" . $vocabIdArray[$i] . "</td><td><a href='vocabInfo.php?content=" . $vocabNameArray[$i] . "'>" . $vocabNameArray[$i] . "</a></td><td>" . $checkTimeArray[$i] . "</td><td></tr>";
+					echo "<tr><td>" . $vocabIdArray[$i] . "</td>
+					<td><a href='vocabInfo.php?content=" . $vocabNameArray[$i] . "'>" . $vocabNameArray[$i] . "</a></td>
+					<td>" . $checkTimeArray[$i] . "</td><td></tr>";
 				}
 			?>
           </tbody>

@@ -15,11 +15,9 @@
 <link rel="stylesheet" type="text/css" href="css/general.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-	$(".dropDown").click(function(){
-    	$(".dropDownContent").slideToggle("slow");
-    });
-})
+function DropDown(){
+	$(".dropDownContent").slideToggle("fast");
+};
 </script>
 </head>
 <body>
@@ -32,14 +30,14 @@ $(document).ready(function(){
 		Enter payment information:<br><br>
 		Card type:
 		<form action="uploadPaymentRecord.php" id="form1" name="form1" method="post">
-		    <table width="100%" border="0" cellspacing="5" cellpadding="8">
+		    <table class="defaultTable">
 			    <tr>
 				    <td><label for="cardnumber">Card number</label></td>
 					<td><input type="text" required name="cardnumber" id="cardnumber" placeholder="0123-4567-8901-2345" maxlength="16"></td>
 				</tr>
 				
 				<tr>
-				    <td><label for="nameoncard">Name of card</label></td>
+				    <td><label for="nameoncard">Card Owner</label></td>
 					<td><input type="text" required name="nameoncard" id="nameoncard" placeholder="Chan Tai Man"></td>
 				</tr>
 				
@@ -55,8 +53,7 @@ $(document).ready(function(){
 					<td><input type="text" required name="secuirtycode" id="secuirtycode" placeholder="123" maxlength="3"></td>
 				</tr>
 				
-				<tr>
-				    
+				<tr>				    
 					<input type="radio" name="cardtype" id="cardtype" value="visa"> visa<br>
 					<input type="radio" name="cardtype" id="cardtype" value="amex" > amex<br>
 					<input type="radio" name="cardtype" id="cardtype" value="mastercard" > mastercard<br>
@@ -68,6 +65,8 @@ $(document).ready(function(){
 				</tr>
 				
 			</table>
+            <input type="hidden" name="planId" value="<?php echo $planId;?>">
+            <input type="hidden" name="price" value="<?php echo $price;?>">
 		</form>
 	</div>
 	

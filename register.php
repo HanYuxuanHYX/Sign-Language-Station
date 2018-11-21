@@ -43,10 +43,6 @@ if(isset($_POST["register"])){
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-	$(".dropDown").click(function(){
-    	$(".dropDownContent").slideToggle("slow");
-    });
-    
 	$("#username").blur(function(){
 		if($("#username").val()==""){
 			$("#username").next().text("The username cannot be empty!");
@@ -106,6 +102,10 @@ $(document).ready(function(){
 	})
 });
 
+function DropDown(){
+	$(".dropDownContent").slideToggle("fast");
+};
+
 function check(){
 	if($("#username").next().text()=="" &&
 	$("#email").next().text()=="" && 
@@ -124,7 +124,7 @@ function check(){
 
 	<div class="mainFrame">
 	  	<form id="form1" name="form1" method="post" onSubmit="return check();">
-			<table>
+			<table class="defaultTable">
             	<tr>
                 	<td colspan="2"><span style="color: red">You must fill in every column！</span></td>
                 </tr>

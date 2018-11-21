@@ -47,9 +47,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-	$(".dropDown").click(function(){
-    	$(".dropDownContent").slideToggle("slow");
-    });
 	$("input").on("input",function(){
 		$("datalist").empty();
 		$.post("scripts/searchVocabWithInitials.php",
@@ -59,6 +56,10 @@ $(document).ready(function(){
         	});
 	});
 })
+
+function DropDown(){
+	$(".dropDownContent").slideToggle("fast");
+};
 
 function add(){
 	$.post("scripts/addToGlossary.php",
@@ -78,7 +79,7 @@ function add(){
 
 	<div class="mainFrame">
     	<h1><?php echo $vocabName;?></h1>
-    	<table width="100%" border="0" cellspacing="5" cellpadding="8">
+    	<table class="defaultTable">
 			<tr>
 				<td>Uploader:</td>
           		<td width="2000"><?php echo $submitter;?></td>

@@ -44,11 +44,9 @@ else{
 <link rel="stylesheet" type="text/css" href="css/general.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-	$(".dropDown").click(function(){
-    	$(".dropDownContent").slideToggle("slow");
-    });
-})
+function DropDown(){
+	$(".dropDownContent").slideToggle("fast");
+};
 </script>
 </head>
 
@@ -57,7 +55,7 @@ $(document).ready(function(){
 
 	<div class="mainFrame">
 	  	<form id="form1" name="form1" method="post">
-			<table>
+			<table class="defaultTable">
             	<tr>
                 	<td colspan="2"><span style="color:red">Please Log In:</span><td>
                 </tr>

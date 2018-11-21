@@ -30,10 +30,6 @@ if(isset($_POST["change"])){
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-	$(".dropDown").click(function(){
-    	$(".dropDownContent").slideToggle("slow");
-    });
-	
 	$("#email").blur(function(){
 		if($("#email").val()==""){
 			$("#email").next().text("Email address should not be empty!");
@@ -43,6 +39,10 @@ $(document).ready(function(){
 		}
 	})
 })
+
+function DropDown(){
+	$(".dropDownContent").slideToggle("fast");
+};
 
 function check(){
 	if($("#email").next().text()=="")
@@ -57,7 +57,7 @@ function check(){
 
 	<div class="mainFrame">
 	  	<form id="form1" name="form1" method="post" onSubmit="return check();">
-			<table>
+			<table class="defaultTable">
 				<tr>
                     <td><label for="email">Please input your email address:</label></td>
           			<td><input type="text" name="email" id="email">

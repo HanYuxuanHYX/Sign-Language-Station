@@ -24,18 +24,16 @@
 <link rel="stylesheet" type="text/css" href="css/general.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-	$(".dropDown").click(function(){
-    	$(".dropDownContent").slideToggle("slow");
-    });
-})
+function DropDown(){
+	$(".dropDownContent").slideToggle("fast");
+};
 </script>
 </head>
 <body>
 	<?php require('header.php');?>
 	
 	<div class="mainFrame">
-		<table>
+		<table class="defaultTable">
 		  <tbody>
           	<tr>
             	<td><b>Vocabulary Id</b></td>

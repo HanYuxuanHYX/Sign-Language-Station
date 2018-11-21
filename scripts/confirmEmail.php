@@ -16,7 +16,8 @@ if($row != false){
 	setcookie("email", $row["email"], time() + 3600);
 	setcookie("registerDate", $row["registerDate"], time() + 3600);
 	mysqli_close($db);
-	header("Location: ../index.php");
+	echo "<script>alert('Your account has been activated! You can log in now.');
+			window.location.href='../index.php';</script>";
 }else
 	echo "<script>alert('邮箱验证错误!')</script>";
 ?>

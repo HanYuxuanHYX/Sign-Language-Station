@@ -13,7 +13,8 @@ if($token == $_SESSION["token"]){
 	
 	mysqli_close($db);	
 	session_destroy();
-	header("Location: ../profile.php");
+	echo "<script>alert('Password has been successfully updated!');
+			window.location.href='../profile.php';</script>";
 }else{
 	echo "<script>alert('授权失败!')</script>";
 	session_destroy();

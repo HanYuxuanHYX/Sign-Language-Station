@@ -1,5 +1,5 @@
 <?php
-require_once 'scripts/sendEmail.php';	
+require_once 'PHPMailer/sendEmail.php';	
 	
 if(isset($_POST["change"])){
 	$password = $_POST["password"];
@@ -29,10 +29,6 @@ if(isset($_POST["change"])){
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-	$(".dropDown").click(function(){
-    	$(".dropDownContent").slideToggle("slow");
-    });
-	
 	$("#password").blur(function(){
 		if($("#password").val()==""){
 			$("#password").next().text("The password should not be empty");
@@ -52,6 +48,10 @@ $(document).ready(function(){
 	})
 })
 
+function DropDown(){
+	$(".dropDownContent").slideToggle("fast");
+};
+
 function check(){
 	if($("#password").next().text()==""&&
 	$("#confirm").next().text()=="")
@@ -66,7 +66,7 @@ function check(){
 
 	<div class="mainFrame">
 	  	<form id="form1" name="form1" method="post" onSubmit="return check();">
-			<table>
+			<table class="defaultTable">
 				<tr>
 					<td><label for="password">new password</label></td>
           			<td><input type="password" name="password" id="password">

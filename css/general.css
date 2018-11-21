@@ -18,16 +18,16 @@ input[type=submit]:hover{
 	background-color: #555555;
 }
 
-table{
+.defaultTable{
 	width: 1600px;
 	border: 0px;
 	margin: 50px;
 }
 
-td{
+.defaultTable td{
 	width:400px;
 	height:50px;
-	font-size:16px;
+	font-size:18px;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;	
 }
 

@@ -33,7 +33,7 @@
 			}
 			mysqli_select_db($db,"18012633x");
 			$sql = "insert into vocabulary(submitter,approver,status,vocabName,description,videoSource,checkTotal,addTotal)
-			values('$submitter','1767182376@qq.com','unapproved','$vocabName','$description','videos/unapproved/" . $_FILES["file"]["name"] . "','0','0')";
+			values('$submitter','tmp','unapproved','$vocabName','$description','videos/userUploaded/" . $_FILES["file"]["name"] . "','0','0')";
 			if(mysqli_query($db,$sql)){
 				echo "<script>alert('Your submission has successfully sent to the admins of the website! Thanks for your effort!')</script>";
 			} else {
@@ -53,11 +53,9 @@
 <link rel="stylesheet" type="text/css" href="css/general.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-	$(".dropDown").click(function(){
-    	$(".dropDownContent").slideToggle("slow");
-    });
-})
+function DropDown(){
+	$(".dropDownContent").slideToggle("fast");
+};
 </script>
 </head>
 <body>
@@ -65,12 +63,13 @@ $(document).ready(function(){
 		
 	<div class="mainFrame">
 	<form action="upload.php" method="post" enctype="multipart/form-data">
-    	<table>
+    	<table class="defaultTable">
         <tbody>
         <tr>
         	<td>Vocabulary Name:</td>
             <td><input type="text" name="vocabName" id="vocabName"/></td>
-		<tr>
+		</tr>
+        <tr>
 			<td>Text description of how to perform the sign:</td>
 			<td><textarea name="descri"></textarea></td>
 		</tr>
@@ -81,6 +80,8 @@ $(document).ready(function(){
         <tr>
 			<td colspan="2"><input type="submit" name="submit" value="Submit" /></td>
         </tr>
+        </tbody>
+        </table>
 	</form>
 	</div>
 	

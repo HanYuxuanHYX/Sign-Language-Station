@@ -9,7 +9,7 @@
            		<a href="javascript:DropDown()">Account Functions</a>
   				<div class="dropDownContent">
   					<a href="profile.php">Personal details</a>
-  					<a href="adminFunctions.php">adminFunctions</a>
+  					<a href="adminFunctions.php">Admin Functions</a>
   				</div>
             </div>
         </li>
