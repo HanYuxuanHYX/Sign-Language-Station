@@ -43,7 +43,7 @@ function DropDown(){
 				
 				<tr>
 				    <td><label for="expirydate">Expiry month</label></td>
-					<td><input type="month" required name="expirydate" id="expirydate" placeholder="MM" maxlength="2"></td>
+					<td><input type="month" required name="expirydate" id="expirydate" placeholder="MM" maxlength="2" min=<?php echo date('Y-m');?>></td>
 				</tr>
 				
 
