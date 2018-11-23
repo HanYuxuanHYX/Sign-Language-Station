@@ -10,11 +10,31 @@
 		exit;
 	}
 	
+	if(isset($_GET["hasVideo"])){
+		$hasVideo = true;
+	}else{
+		$hasVideo = false;
+	}
+	if(isset($_GET["onlyApproved"])){
+		$onlyApproved = true;
+	}else{
+		$onlyApproved = false;
+	}
+	
 	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
 	mysqli_select_db($db,"18012633x");
-	$sql = "SELECT * FROM vocabulary WHERE vocabName ='" . $content . "' AND status='approved'";
+	$sql = "SELECT * FROM vocabulary WHERE vocabName ='" . $content . "'";
+	
+	if($hasVideo){
+		$sql = $sql . " AND videoSource!=''";
+	}
+	if($onlyApproved){
+		$sql = $sql . " AND status='approved'";
+	}
+	
 	$result = mysqli_query($db,$sql) or die("SQL error!<br>");
 	$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+	if($row!=false){
 		$vocabId = $row['vocabId'];
     	$submitter = $row['submitter'];
 		$approver = $row['approver'];
@@ -23,17 +43,22 @@
 		$videoSource = $row['videoSource'];
 		$checkTotal = $row['checkTotal'];
 		
-	$sql2 = "UPDATE vocabulary SET checkTotal=checkTotal+1 WHERE vocabId='" . $vocabId . "'";
-	mysqli_query($db,$sql2) or die("SQL error!<br>");
-	$sql3 = "INSERT INTO checkinghistory(email,vocabId,vocabName,checkTime) VALUES('" . $_COOKIE['email'] . "','" . $vocabId . "','" . $vocabName . "','" . date('Y-m-d') . "')";
-	mysqli_query($db,$sql3) or die("SQL error!<br>");	
-	$sql4 = "SELECT * FROM addingtoglossaryhistory WHERE vocabId='" . $vocabId . "' AND email='" . $_COOKIE['email'] . "'";
-	$result2 = mysqli_query($db,$sql4) or die("SQL error!<br>");
-	$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
-	if($row2==false){
-		$alreadyAddToGlossary = false;
-	}else{
-		$alreadyAddToGlossary = true;
+		$sql2 = "UPDATE vocabulary SET checkTotal=checkTotal+1 WHERE vocabId='" . $vocabId . "'";
+		mysqli_query($db,$sql2) or die("SQL error!<br>");
+		$sql3 = "INSERT INTO checkinghistory(email,vocabId,vocabName,checkTime) VALUES('" . $_COOKIE['email'] . "','" . 
+				$vocabId . "','" . $vocabName . "','" . date('Y-m-d') . "')";
+		mysqli_query($db,$sql3) or die("SQL error!<br>");	
+		$sql4 = "SELECT * FROM addingtoglossaryhistory WHERE vocabId='" . $vocabId . "' AND email='" . $_COOKIE['email'] . "'";
+		$result2 = mysqli_query($db,$sql4) or die("SQL error!<br>");
+		$row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
+		if($row2==false){
+			$alreadyAddToGlossary = false;
+		}else{
+			$alreadyAddToGlossary = true;
+		}
+	}
+	else{
+		header("Location: noResult.php");
 	}
 	mysqli_close($db);
 ?>

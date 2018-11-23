@@ -129,14 +129,14 @@ function check(){
                 	<td colspan="2"><span style="color: red">You must fill in every column！</span></td>
                 </tr>
 				<tr>
-					<td><label for="username">username:</label></td>
+					<td><label for="username">Username:</label></td>
           			<td><input type="text" name="username" id="username">
           				<span style="color: red"></span>
           			</td>
 				</tr>
 
 				<tr>
-					<td><label for="email">email:</label></td>
+					<td><label for="email">Email:</label></td>
 					<td><input type="email" name="email" id="email">
 						<span style="color: red"></span>
 					</td>
@@ -144,7 +144,7 @@ function check(){
 				</tr>
 
 				<tr>
-					<td><label for="password">password:</label></td>
+					<td><label for="password">Password:</label></td>
 					<td><input type="password" name="password" id="password">
 						<span style="color: red"></span>
 					</td>
@@ -152,7 +152,7 @@ function check(){
 				</tr>
 
 				<tr>
-					<td><label for="confirm">confimPassword:</label></td>
+					<td><label for="confirm">Confirm Password:</label></td>
 					<td><input type="password" name="confirm" id="confirm">
 						<span style="color: red"></span>
 					</td>
@@ -160,7 +160,7 @@ function check(){
 				</tr>
 				
 				<tr>
-					<td><label for="birthday">birthday:</label></td>
+					<td><label for="birthday">Birthday:</label></td>
 					<td><input type="date" name="birthday" id="birthday">
 						<span style="color: red"></span>
 					</td>
@@ -169,12 +169,12 @@ function check(){
 
 				
 				<tr>
-					<td><label for="disability">disability:</label></td>
+					<td><label for="disability">Disability:</label></td>
 					<td><select name="disability" id="disability">
+                    	<option value="neither">neither</option>
 						<option value="hearingDisability">hearing disability</option>
 						<option value="speakingDisability">speaking disability</option>
 						<option value="both">both</option>
-						<option value="neither">neither</option>
 						</select>
 						<span style="color: red"></span>
 					</td>					

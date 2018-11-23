@@ -8,6 +8,6 @@
 	if($row == false)
 		echo "";
 	else
-		echo "抱歉，该用户名已被注册";
+		echo "Sorry, this email has already been registered";
 	mysqli_close($db);
 ?>
