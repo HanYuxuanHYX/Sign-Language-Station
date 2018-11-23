@@ -141,7 +141,7 @@ a.viewPaymentRecordLink:active {
 <div class ="approveVoc"><a class="approveVocLink" href="approveUploadedVocab.php">Approve Uploaded Vocabulary</a></div>
 <div class="editVoc"><a class="editVocaLink" href=""> Edit Vocabulary </a></div>
 <div class ="reviewReport"><a class="reviewReportLink" href="" >Generate Viewing History Report</a></div>
-<div class="modifyCustomer"><a class="modifyCustomerLink" href=""> Modify Customer Information</a></div>
+<div class="modifyCustomer"><a class="modifyCustomerLink" href="updateUser.php"> Modify Customer Information</a></div>
 <div class="viewPaymentRecord"><a class="viewPaymentRecordLink" href="viewSubscriptionPlanHistory.php"> Review the Payment Record </a></div>
 </div>
 <?php require('footer.php');?>
