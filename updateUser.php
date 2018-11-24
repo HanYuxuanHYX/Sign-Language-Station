@@ -5,23 +5,6 @@
 	$conn = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
 	mysqli_select_db($conn,"18012633x");
 	
-	// $searchUserID = $_POST['searchUserID'];
-	// $daysLeft = "SELECT daysLeft FROM member WHERE username=?";
-	// if($stmt = mysqli_prepare($link, $daysLeft)) {
-	// 	mysqli_stmt_bind_param($stmt, "s", $searchUserID);
-	// 	mysqli_stmt_execute($stmt);
-	// 	mysqli_stmt_close($stmt);
-	// 	echo '<table>
-	//         <tr><th>username</th><th>days left</th><tr>
-	// 	    <tr><td>'.$searchUserID.'</td><td>'.$daysLeft.'</td></tr>
-	//     </table>';
-	// 	echo '<form>
-	// 	    <tr>
-	// 			<td><input type="submit" name="delete" id="delete"></td>
-	// 		</tr>
-	// 	</form>';
-	//}
-	
 	$sql1 = "SELECT * FROM permission WHERE title='" . $_COOKIE["title"] . "'";
 	$result1 = mysqli_query($conn,$sql1) or die("SQL error!<br>");
 	$row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC);	
@@ -127,49 +110,6 @@ th{
 		  }
 		}
 	</script>
-
-
-
-
-
-	<script>
-	$(document).ready(function(){  
-	     $('#editable_table').Tabledit({
-	      url:'action.php',
-	      columns:{
-	       identifier:[0, "id"],
-	       editable:[[1, 'first_name'], [2, 'last_name']]
-	      },
-	      restoreButton:false,
-	      onSuccess:function(data, textStatus, jqXHR)
-	      {
-	       if(data.action == 'delete')
-	       {
-	        $('#'+data.id).remove();
-	       }
-	      }
-	     });
-	 
-	});  
-	 </script>
-
-
-
-
-
-
-
-<!-- 	    <form id="form2" name="form2" method="post">
-	        Please search:
-		    <tr>
-		        <td><label for="searchUserID">UserID</label></td>
-		    	<td><input type="text" required name="searchUserID" id="searchUserID" placeholder="Username"></td>
-		    </tr>
-			
-			<tr>
-				<td><input type="submit" name="Submit" id="Submit"></td>
-			</tr>
-		</form> -->
 	</div>
 	
 	<?php require('footer.php');?>
