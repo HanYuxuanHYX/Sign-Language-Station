@@ -24,6 +24,7 @@ else{
 				setcookie("username", $username, time() + 3600);
 				setcookie("email", $row["email"], time() + 3600);
 				setcookie("registerDate", $row["registerDate"], time() + 3600);
+				setcookie("title",$row["title"], time() + 3600);
 				setcookie("daysLeft", $row["daysLeft"], time() + 3600);
 				mysqli_close($db);
 				header("Location: index.php");

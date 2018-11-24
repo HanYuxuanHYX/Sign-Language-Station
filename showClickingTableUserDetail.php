@@ -1,8 +1,6 @@
 <?php
-
 	session_start();
 	require_once 'connect_db.php';
-
 	if(!isset($_COOKIE["username"]) && !isset($_COOKIE["email"]) )
 		header("Location: login.php");
 	
@@ -17,7 +15,6 @@
 	$smonethStart = $vmonth ."-01";
 	$svocabID = $_POST['svocabID'];
 	
-
 	
 	echo "
 	  <body>
@@ -55,7 +52,6 @@ AND checkinghistory.checkTime >= ? AND checkinghistory.checkTime <= ? AND checki
 						 while(mysqli_stmt_fetch($stmt)){
 								echo "['".$vocabName."', '".$vocabId."', '".$checkTime."', '".$email."', '".$userName."', '".$birthday."', '".$disability."', '".$title."', '".$registerDate."', '".$daysLeft."'],";
 							}
-
 						mysqli_stmt_close($stmt);
 						
 						mysqli_close($link);
@@ -63,7 +59,6 @@ AND checkinghistory.checkTime >= ? AND checkinghistory.checkTime <= ? AND checki
 					{
 						echo "Cannot obtain the user information. Please connect to the IT department.";
 					}
-
 	echo "]);";
 	
 	echo "var checkingHistoryUserOptions = {

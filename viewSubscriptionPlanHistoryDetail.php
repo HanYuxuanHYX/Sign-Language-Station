@@ -17,14 +17,11 @@ $(document).ready(function(){
     border-collapse: collapse;
     width: 80%;
 }
-
 .paymentTable th, .paymentTable td {
     text-align: center;
     padding: 8px;
 }
-
 .paymentTable tr:nth-child(odd){background-color: #f2f2f2}
-
 .paymentTable th {
     background-color: #888888;
     color: white;
@@ -35,7 +32,6 @@ $(document).ready(function(){
 <?php 
 session_start();
 require_once 'connect_db.php';
-
 if(!isset($_POST['smonth']) && !isset($_POST['splanid'])  )
 		header("Location: login.php");
 	
@@ -43,7 +39,6 @@ $smonth = $_POST['smonth'];
 $smonethEnd = $smonth . "-31";
 $smonethStart = $smonth ."-01";
 $splanid = $_POST['splanid'];
-
 try
 {
 	$insertCreditCardRecord = "SELECT paymentId, email, planId, paymentTime, paymentPrice FROM  payment WHERE planId = ? AND paymentTime <= ? AND paymentTime >= ? ;";

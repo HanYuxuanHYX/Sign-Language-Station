@@ -1,8 +1,20 @@
 <?php
-		require('header.php');
-		if(!isset($_COOKIE["username"])){
+	if(!isset($_COOKIE["username"])){
 		header("Location: login.php");
 		exit;
+	}
+	
+	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
+	mysqli_select_db($db,"18012633x");
+	
+	$sql1 = "SELECT * FROM permission 
+			WHERE title='" . $_COOKIE["title"] . "'";
+	$result1 = mysqli_query($db,$sql1) or die("SQL error!<br>");
+	$row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC);
+	
+	if($row1["statistics"]==0){
+		echo "<script>alert('You do not have the authority to do this!');
+		window.location.href='adminFunctions.php';</script>";
 	}
 ?>
 <html>
@@ -23,7 +35,8 @@
    </head>
 
    <body>
-      <div id = "container" style = "width: 700px; height: 400px; margin: 70 auto">
+   	<?php require('header.php');?>
+      <div id = "container" style = "width: 1050px; height: 600px; margin: 70 auto">
       </div>
       <script language = "JavaScript">
          function drawChart() {
@@ -37,7 +50,6 @@
               <?php
 					session_start();
 					require_once 'connect_db.php';
-
 					if(!isset($_COOKIE["username"]) && !isset($_COOKIE["email"]) )
 							header("Location: login.php");
 	
@@ -52,7 +64,6 @@
 						 while(mysqli_stmt_fetch($stmt)){
 								echo "['".$month."', ".substr_count($groupPlanId, '1').", ".substr_count($groupPlanId, '2').", ".substr_count($groupPlanId, '3')."],";
 							}
-
 						mysqli_stmt_close($stmt);
 						
 						mysqli_close($link);
@@ -70,15 +81,14 @@
                vAxis: {
                   title: 'Purchase Number '
                },   
-               'width':700,
-               'height':400,
-               pointsVisible: true
+               'width':1050,
+               'height':600,
+               pointsVisible: true,
+			   backgroundColor: 'transparent'
             };
-
             // Instantiate and draw the chart.
             var chart = new google.visualization.LineChart(document.getElementById('container'));
             
-
         function selectHandler() {
           var selectedItem = chart.getSelection()[0];
           if (selectedItem) {

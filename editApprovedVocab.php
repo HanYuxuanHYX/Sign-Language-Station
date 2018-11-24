@@ -25,7 +25,7 @@
 	$sql1 = "SELECT * FROM permission WHERE title='" . $_COOKIE["title"] . "'";
 	$result1 = mysqli_query($conn,$sql1) or die("SQL error!<br>");
 	$row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC);	
-	if($row1["writeMember"]==0){
+	if($row1["editApprovedVocab"]==0){
 		echo "<script>alert('You do not have the authority to do this!');
 		window.location.href='adminFunctions.php';</script>";
 	}
@@ -50,12 +50,12 @@ $(document).ready(function(){
 <style>
 td{
 	height:60px;
-	font-size:16px;
+	font-size:15px;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;	
 }
 th{
 	height:60px;
-	font-size:16px;
+	font-size:14px;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	text-align:left;
 }
@@ -64,43 +64,48 @@ th{
 <body>
 	<?php require('header.php');?>
 	<div class="mainFrame">
-	<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search email.." >
+	<input type="text" id="myInput" onKeyUp="myFunction()" placeholder="Search vocabulary by name.." >
 	<table id="myTable" width=auto;>
 	  <tr>
-	    <th width="300px"><strong>email</strong></th>
-	    <th width="200px"><strong>userName</strong></th> 
-	    <th width="300px"><strong>password</strong></th>
-	    <th width="200px"><strong>birthday</strong></th>
-	    <th width="100px"><strong>disability</strong></th>
-	    <th width="200px"><strong>title</strong></th>
-	    <th width="200px"><strong>registerDate</strong></th>
-	    <th width="50px"><strong>activated</strong></th>
-	    <th width="100px"><strong>daysLeft</strong></th>
-	    <th width="100px"><strong>deleteUser</strong></th>
-	    <th width="600px"><strong>edit days lef</strong>t</th>
+	    <th width="300px"><strong>submitter</strong></th>
+		
+	    <th width="300px"><strong>approver</strong></th> 
+	    <th width="200px"><strong>status</strong></th>
+	    <th width="200px"><strong>vocabname</strong></th>
+
+	    <th width="500px"><strong>description</strong></th>
+
+	    <th width="200px"><strong>videoSource</strong></th>
+	    <th width="100px"><strong>checkTotal</strong></th>
+	    <th width="100px"><strong>addTotal</strong></th>
+	    <th width="100px"><strong>delete</strong></th>
+	    <th width="400px"><strong>edit description</strong></th>
+        <th width="400px"><strong>edit video source</strong></th>
 	  </tr>
 
 	<?php 
-	$sql = "SELECT * FROM 18012633x.member;";
+	$sql = "SELECT * FROM vocabulary WHERE status='approved';";
 	$result = mysqli_query($conn, $sql);
 	if (mysqli_num_rows($result) > 0) {
     	// output data of each row
 	    while($row = mysqli_fetch_assoc($result)) {
-	        echo '<tr><td>' . $row["email"]. '</td><td>'
-			. $row["userName"].'</td><td>'
-			. $row["password"]. '</td><td>'
-			. $row["birthday"]. '</td><td>'
-			. $row["disability"]. '	</td><td>'
-			. $row["title"]. '</td><td>'
-			. $row["registerDate"]. '</td><td>'
-			. $row["activated"]. '</td><td>'
-			. $row["daysLeft"]. "</td><td>
-	        <a href='scripts/deleteUser.php?email=".$row['email']."'>delete</td><td>
-			<form action='scripts/updateDaysLeft.php' method='post'>
-			<input type='text' name='daysLeft' >
-			<input type='submit' value='Submit'><input type='hidden' name='email' value=".$row['email'].">
-			</form>
-	        </td>";
+	        echo '<tr><td>' . $row["submitter"]. '</td><td>'
+			. $row["approver"].'</td><td>'
+			. $row["status"]. '</td><td>'
+			. $row["vocabName"]. '</td><td>'
+			. $row["description"]. '	</td><td>'
+			. $row["videoSource"]. '</td><td>'
+			. $row["checkTotal"]. '</td><td>'
+			. $row["addTotal"]. '</td><td>' 
+			. "<a href='scripts/deleteVocab.php?vocabId=".$row['vocabId']."'>delete</td><td>
+			<form action='scripts/updateDescription.php' method='post'>
+			<input type='text' name='description' >
+			<input type='submit' value='Submit'>
+			<input type='hidden' name='vocabId' value=".$row['vocabId']."></form></td>"
+			. "<td><form action='scripts/updateVideoSource.php' method='post'>
+			<input type='text' name='videoSource'>
+			<input type='submit' value='Submit'>
+			<input type='hidden' name='vocabId' value=".$row['vocabId']."></form></td>";
 	    }
 	}
 	mysqli_close($conn);
@@ -116,7 +121,7 @@ th{
 		  table = document.getElementById("myTable");
 		  tr = table.getElementsByTagName("tr");
 		  for (i = 0; i < tr.length; i++) {
-		    td = tr[i].getElementsByTagName("td")[0];
+		    td = tr[i].getElementsByTagName("td")[3];
 		    if (td) {
 		      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
 		        tr[i].style.display = "";

@@ -26,14 +26,17 @@ function DropDown(){
 	    <tr>
 	      <td><strong>username</strong></td>
 	      <td><?php echo $_COOKIE["username"]?></td>
+          <td><a href="changeUsername.php">change username</a></td>
         </tr>
 	    <tr>
 	      <td><strong>email address</strong></td>
 	      <td><?php echo $_COOKIE["email"]?></td>
+          <td><a href="rebindEmail.php">rebind email</a></td>
         </tr>
 	    <tr>
 	      <td><strong>sign up date</strong></td>
 	      <td><?php echo $_COOKIE["registerDate"]?></td>
+          <td><a href="changePassword.php">reset password</a></td>
         </tr>
         <tr>
 	      <td><strong>remained subscription time</strong></td>
@@ -41,7 +44,6 @@ function DropDown(){
 	      <td><a href="payment.php">make a subscription</a></td>
         </tr>
 	    <tr>
-	      <td><a href="changePassword.php">change password</a></td>
 	      <td><a href="logout.php">log out</a></td>
         </tr>
       </tbody>

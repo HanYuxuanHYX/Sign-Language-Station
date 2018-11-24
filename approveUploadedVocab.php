@@ -14,14 +14,15 @@
 	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
 	mysqli_select_db($db,"18012633x");
 	
-	$sql1 = "SELECT editUnapprovedVocab FROM permission,member 
-			WHERE member.title=permission.title AND
-			email='" . $_COOKIE["email"] . "'";
+	$sql1 = "SELECT * FROM permission 
+			WHERE title='" . $_COOKIE["title"] . "'";
 	$result1 = mysqli_query($db,$sql1) or die("SQL error!<br>");
 	$row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC);
+	
 	if($row1["editUnapprovedVocab"]==1){
 		$sql = "SELECT * FROM vocabulary WHERE status='unapproved'";
 		$result = mysqli_query($db,$sql) or die("SQL error!<br>");
+		mysqli_close($db);
 		while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 			array_push($vocabIdArray,$row['vocabId']);
 			array_push($vocabNameArray,$row['vocabName']);
@@ -30,10 +31,10 @@
 			array_push($videoSourceArray,$row['videoSource']);		
 		}
 	}else{
+		mysqli_close($db);
 		echo "<script>alert('You do not have the authority to do this!');
 			window.location.href='adminFunctions.php';</script>";
 	}
-	mysqli_close($db);
 ?>
 
 <!doctype html>
@@ -50,14 +51,14 @@ function DropDown(){
 </script>
 <style>
 table{
-	width: 1600px;
+	width: auto;
 	border: 0px;
-	margin: 50px;
+	margin: 20px;
 }
 
 td{
-	height:80px;
-	font-size:14px;
+	height:60px;
+	font-size:16px;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;	
 }
 </style>
@@ -70,13 +71,13 @@ td{
 		<table>
 		  <tbody>
           	<tr>
-            	<td width="100px"><b>vocabId</b></td>
-                <td width="150px"><b>vocabName</b></td>
-                <td width="300px"><b>submitter</b></td>
-                <td width="500px"><b>description</b></td>
-                <td width="250px"><b>video</b></td>
-                <td width="100px"><b>approve</b></td>
-                <td width="100px"><b>reject</b></td>
+            	<td width=5%><b>vocabId</b></td>
+                <td width=10%><b>vocabName</b></td>
+                <td width= 15%><b>submitter</b></td>
+                <td width=30%><b>description</b></td>
+                <td width=15%><b>video</b></td>
+                <td width=8%><b>approve</b></td>
+                <td width=5%><b>reject</b></td>
             </tr>
           	<?php
 				$i = 0;
@@ -88,7 +89,7 @@ td{
 					<td>" . $submitterArray[$i] . "</td>
 					<td>" . $descriptionArray[$i] . "</td>
 					<td><a href='videoOnly.php?videoSource=" . $videoSourceArray[$i]. "'>click here to view the video</a></td>
-					<td><a href='scripts/approveFunction.php?vocabId=" . $vocabIdArray[$i] . "'>approve</a></td>
+					<td><a href='scripts/approveFunction.php?vocabId=" . $vocabIdArray[$i] . "&vocabName=" . $vocabNameArray[$i] . "&submitter=" . $submitterArray[$i] . "'>approve</a></td>
 					<td><a href='scripts/rejectFunction.php?vocabId=" . $vocabIdArray[$i] . "'>reject</a></td></tr>";
 				}
 			?>

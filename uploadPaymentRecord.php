@@ -3,7 +3,6 @@ session_start();
 require_once 'connect_db.php';
 if(!isset($_COOKIE["username"]) && !isset($_COOKIE["email"]) )
 		header("Location: login.php");
-
 $planID = $_POST['planId'];
 $price = $_POST['price'];
 $cardNumber = $_POST['cardnumber'];
@@ -12,7 +11,6 @@ $expiryDate = $_POST['expirydate']. "-01" ;
 $secuirtyCode = $_POST['secuirtycode'];
 $cardType = $_POST['cardtype'];
 $updateCreditCardQuery = "REPLACE INTO creditCardInfo (cardNumber, cardType, cardOwnerName, expiryDate , securityCode) values (?,?,?,?,?);";
-
 if($stmt = mysqli_prepare($link, $updateCreditCardQuery))
 {
 	mysqli_stmt_bind_param($stmt, "isssi", $cardNumber, $cardType,  $nameOfCard , $expiryDate, $secuirtyCode);
@@ -59,8 +57,6 @@ if($stmt = mysqli_prepare($link, $updateCreditCardQuery))
 				mysqli_stmt_execute($stmt4);
 	
 				mysqli_stmt_close($stmt4);
-
-
 				$updateTitle= "UPDATE member SET title='subscribedUser' WHERE email=? AND title='visitor';";
 				if($stmt5 = mysqli_prepare($link, $updateTitle)){
 					mysqli_stmt_bind_param($stmt5, 's', $_COOKIE["email"] );
@@ -69,7 +65,6 @@ if($stmt = mysqli_prepare($link, $updateCreditCardQuery))
 					//if visitor pay, it becomes subscribedUser
 				}
 			
-
 				
 				
 				echo "<script>alert('Your payment record is created. Enjory Learning Sign Language.')</script>";
@@ -96,6 +91,5 @@ if($stmt = mysqli_prepare($link, $updateCreditCardQuery))
 echo "The server cannot process your payment.\nPlease try it again or connect with our administrator. ";
 }
 mysqli_close($link);
-
 require("index.php");
 ?>

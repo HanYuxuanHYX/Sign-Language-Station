@@ -1,8 +1,6 @@
 <?php
-
 	session_start();
 	require_once 'connect_db.php';
-
 	if(!isset($_COOKIE["username"]) && !isset($_COOKIE["email"]) )
 		header("Location: login.php");
 	
@@ -36,7 +34,6 @@
 						 while(mysqli_stmt_fetch($stmt)){
 								echo "['".$month."', ".$checkTime."],";
 							}
-
 						mysqli_stmt_close($stmt);
 						
 						mysqli_close($link);
@@ -44,7 +41,6 @@
 					{
 						echo "Cannot obtain the vocabulary information. Please connect to the IT department.";
 					}
-
 	echo "]);";
 	
 	echo "var vocabDetailOptions = {'title' : 'The Checking History of Vocabulary ID : ".$_POST["vocabId"]."',
@@ -86,7 +82,6 @@
 			});
 				}
 			}
-
             google.visualization.events.addListener(detailchart, 'select', selectMonthHandler);
 			
 			

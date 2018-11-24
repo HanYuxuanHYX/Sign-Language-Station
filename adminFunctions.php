@@ -47,7 +47,6 @@ function DropDown(){
     width: 100%;
     padding: 20px;
 }
-
 a.approveVocLink {
     background-color: #009999;
     box-shadow: 0 5px #888888;
@@ -99,7 +98,6 @@ a.modifyCustomerLink:active {
   box-shadow: none;
   top: 5px;
 }
-
 a.editVocaLink {
     background-color: #0066cc;
     box-shadow: 0 5px #888888;
@@ -117,7 +115,6 @@ a.editVocaLink:active {
   box-shadow: none;
   top: 5px;
 }
-
 a.viewPaymentRecordLink{
     background-color: #0099cc;
     box-shadow: 0 5px #888888;
@@ -135,8 +132,6 @@ a.viewPaymentRecordLink:active {
   box-shadow: none;
   top: 5px;
 }
-
-
 a.showClickingTableLink{
     background-color: #FF6633;
     box-shadow: 0 5px #888888;
@@ -154,19 +149,15 @@ a.showClickingTableLink:active {
   box-shadow: none;
   top: 5px;
 }
-
-
-
-
 </style>
 
 </head>
 <body>
 <div class="center">
 <div class ="approveVoc"><a class="approveVocLink" href="approveUploadedVocab.php">Approve Uploaded Vocabulary</a></div>
-<div class="editVoc"><a class="editVocaLink" href=""> Edit Vocabulary </a></div>
+<div class="editVoc"><a class="editVocaLink" href="editApprovedVocab.php"> Edit Vocabulary </a></div>
 <div class ="reviewReport"><a class="reviewReportLink" href="" >Generate Viewing History Report</a></div>
-<div class="modifyCustomer"><a class="modifyCustomerLink" href=""> Modify Customer Information</a></div>
+<div class="modifyCustomer"><a class="modifyCustomerLink" href="updateUser.php"> Modify Customer Information</a></div>
 <div class="viewPaymentRecord"><a class="viewPaymentRecordLink" href="viewSubscriptionPlanHistory.php"> Review the Payment Record </a></div>
 <div class="showClickingTable"><a class="showClickingTableLink" href="showClickingTable.php"> Review the Chicking History </a></div>
 </div>

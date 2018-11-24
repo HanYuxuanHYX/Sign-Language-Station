@@ -37,7 +37,6 @@
 			<?php
 					session_start();
 					require_once 'connect_db.php';
-
 					if(!isset($_COOKIE["username"]) && !isset($_COOKIE["email"]) )
 							header("Location: login.php");
 	
@@ -52,7 +51,6 @@
 						 while(mysqli_stmt_fetch($stmt)){
 								echo "['".$vocabId."', '".$vocabName."',".$checkTotal."],";
 							}
-
 						mysqli_stmt_close($stmt);
 						
 						mysqli_close($link);
@@ -61,7 +59,6 @@
 						echo "Cannot obtain the vocabulary information. Please connect to the IT department.";
 					}
                 ?>]);
-
             var options = {
                showRowNumber: true,
                width: '100%', 

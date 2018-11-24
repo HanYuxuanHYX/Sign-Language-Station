@@ -3,8 +3,23 @@
 		header("Location: login.php");
 		exit;
 	}
+	
+	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
+	mysqli_select_db($db,"18012633x");
+	$sql0 = "SELECT * FROM permission WHERE title='" . $_COOKIE["title"] . "'";
+	$result0 = mysqli_query($db,$sql0) or die("SQL error!<br>");
+	$row0 = mysqli_fetch_array($result0, MYSQLI_ASSOC);
+	
+	if($row0["uploadVocab"]==0){
+		mysqli_close($db);
+		echo "<script>alert('You do not have the authority to do this!');
+		window.location.href='index.php';</script>";
+		exit;
+	}
+	
 	if(isset($_POST["submit"])){
-		$target_dir = "videos/unapproved/";
+
+		$target_dir = "videos/";
 		$target_file = $target_dir . basename($_FILES["file"]["name"]);
 		
 		$videoFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -27,13 +42,9 @@
 			$submitter = $_COOKIE["email"];
 			$vocabName = $_POST["vocabName"];
 			$description = $_POST["descri"];
-			$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
-			if(!$db){
-				 die("Connection failed: " . mysqli_connect_error());
-			}
-			mysqli_select_db($db,"18012633x");
+
 			$sql = "insert into vocabulary(submitter,approver,status,vocabName,description,videoSource,checkTotal,addTotal)
-			values('$submitter','tmp','unapproved','$vocabName','$description','videos/userUploaded/" . $_FILES["file"]["name"] . "','0','0')";
+			values('$submitter','tmp','unapproved','$vocabName','$description','videos/" . $_FILES["file"]["name"] . "','0','0')";
 			if(mysqli_query($db,$sql)){
 				echo "<script>alert('Your submission has successfully sent to the admins of the website! Thanks for your effort!')</script>";
 			} else {

@@ -44,6 +44,8 @@ function DropDown(){
         <input type="checkbox" name="onlyApproved" id="onlyApproved" checked>only show vocabularies already approved by administrators
         <br><br><br>
         <a href="checkingHistory.php">view my searching history</a>
+        <br><br>
+        <a href="topCharts.php">top charts</a>
 	  	</form>
 	</div>
 	
