@@ -14,8 +14,8 @@
             </div>
         </li>
 		<?php
-		if(isset($_COOKIE["username"]))
-			echo "<li><a href='logout.php'>log off " . $_COOKIE["username"] . "</a></li>";
+		if(isset($_COOKIE["email"]))
+			echo "<li><a href='logout.php'>log off " . $_COOKIE["email"] . "</a></li>";
 		else
 			echo "<li><a href='login.php'>log in</a></li>";
 		?>
