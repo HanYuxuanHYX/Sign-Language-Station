@@ -14,11 +14,6 @@
 		echo "<script>alert('You do not have the authority to do this!');
 			window.location.href='adminFunctions.php';</script>";
 	}
-
-
-
-
-
 require('footer.php');
 ?>
 
@@ -35,7 +30,6 @@ function DropDown(){
 };
 </script>
 <style>
-
 td{
 	height:80px;
 	font-size:14px;
@@ -74,7 +68,6 @@ th{
           	<?php 
 	$sql = "SELECT * FROM 18012633x.member;";
 	$result = mysqli_query($db, $sql);
-
 	if (mysqli_num_rows($result) > 0) {
     	// output data of each row
 	    while($row = mysqli_fetch_assoc($result)) {
