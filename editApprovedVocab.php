@@ -1,5 +1,5 @@
 <?php
-	if(!isset($_COOKIE["username"]))
+	if(!isset($_COOKIE["email"]))
 		header("Location: login.php");
 	
 	$conn = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
