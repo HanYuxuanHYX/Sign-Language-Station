@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if(!isset($_COOKIE["username"]))
+	if(!isset($_COOKIE["email"]))
 		header("Location: login.php");
 	
 	$planId = $_POST['planId'];
