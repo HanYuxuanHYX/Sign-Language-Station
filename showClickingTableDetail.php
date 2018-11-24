@@ -20,7 +20,7 @@
             vocabData.addRows([";
 			require_once 'connect_db.php';
 					
-					$findVocabDetail = "SELECT CONCAT(YEAR(checkTime),'-',MONTH(checkTime)) AS Month, count(vocabId) FROM checkinghistory  WHERE checkTime between DATE_SUB(now(), INTERVAL 12 MONTH) and now() AND vocabId = ? GROUP BY Month ;";
+					$findVocabDetail = "SELECT CONCAT(YEAR(checkTime),'-',MONTH(checkTime)) AS Month, count(vocabId) FROM checkinghistory  WHERE vocabId = ? GROUP BY Month ;";
 					
 					if($stmt = mysqli_prepare($link, $findVocabDetail))
 					{
