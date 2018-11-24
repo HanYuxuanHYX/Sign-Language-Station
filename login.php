@@ -1,28 +1,28 @@
 <?php
-if(isset($_COOKIE["username"]))
+if(isset($_COOKIE["email"]))
 	header("Location: profile.php");
 else{
 	if(isset($_POST["login"])){
-		$username = $_POST["username"];
+		$email = $_POST["email"];
 		$password = $_POST["password"];
-		if(empty($username)){
-			echo "<script>alert('User name is empty!')</script>";
+		if(empty($email)){
+			echo "<script>alert('Email is empty!')</script>";
 		}
 		else if(empty($password)){
-			echo "<script>alert('Email address is empty!')</script>";
+			echo "<script>alert('password is empty!')</script>";
 		}
 		else{
 			$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
 			mysqli_select_db($db,"18012633x");
 			$sql = "SELECT * FROM member WHERE password='" . 
-				$password . "' AND ( username = '" . 
-				$username . "' OR email = '" . $username . "')" .
-				"AND activated = '1'";
+				$password . "' AND  email = '" . $email."'" 
+				."AND activated = '1'";
 			$result = mysqli_query($db,$sql) or die("SQL error!<br>");
 			$row = mysqli_fetch_assoc($result);
 			if($row != false){
-				setcookie("username", $username, time() + 3600);
-				setcookie("email", $row["email"], time() + 3600);
+				
+				setcookie("email", $email, time() + 3600);
+				setcookie("username", $row["username"], time() + 3600);
 				setcookie("registerDate", $row["registerDate"], time() + 3600);
 				setcookie("title",$row["title"], time() + 3600);
 				setcookie("daysLeft", $row["daysLeft"], time() + 3600);
@@ -30,7 +30,7 @@ else{
 				header("Location: index.php");
 			}			
 			else
-				echo "<script>alert('Username/email address or password is incorrect')</script>";
+				echo "<script>alert('email address or password is incorrect')</script>";
 
 		}
 	}
@@ -61,8 +61,8 @@ function DropDown(){
                 	<td colspan="2"><span style="color:red">Please Log In:</span><td>
                 </tr>
 				<tr>
-					<td><label for="username">username/email address</label></td>
-          			<td><input type="text" name="username" id="username"></td>
+					<td><label for="email">email address</label></td>
+          			<td><input type="text" name="email" id="email"></td>
 				</tr>
 
 				<tr>
