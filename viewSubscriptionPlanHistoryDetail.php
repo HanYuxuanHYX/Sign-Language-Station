@@ -55,7 +55,7 @@ try
 		
 		if(mysqli_stmt_num_rows($stmt) > 0)
 		{
-			echo "<div class='paymentTable'><table border='1'><thead><tr><th>Payment ID</th><th>User's Email</th><th>Plan ID </th><th>Payment Price </th><th>Payment Time </th></tr></thead><tbody></div>";
+			echo "<div class='paymentTable'><table border='1'><thead><tr><th>Payment ID</th><th>User's Email</th><th>Plan ID </th><th>Payment Time </th><th>Payment Price </th></tr></thead><tbody></div>";
 		
 		
 			while (mysqli_stmt_fetch($stmt)) {
