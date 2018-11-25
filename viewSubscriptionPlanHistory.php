@@ -40,7 +40,7 @@
       </div>
       <script language = "JavaScript">
          function drawChart() {
-            // Define the chart to be drawn.
+
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Month');
             data.addColumn('number', 'Plan 1');
@@ -73,7 +73,6 @@
 					}
                 ?>]);
                
-            // Set chart options
             var options = {'title' : 'The Purchase Number of each subscription plan',
                hAxis: {
                   title: 'Month'
@@ -86,7 +85,6 @@
                pointsVisible: true,
 			   backgroundColor: 'transparent'
             };
-            // Instantiate and draw the chart.
             var chart = new google.visualization.LineChart(document.getElementById('container'));
             
         function selectHandler() {
