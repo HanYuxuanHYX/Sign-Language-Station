@@ -63,11 +63,38 @@ if($stmt = mysqli_prepare($link, $updateCreditCardQuery))
 					mysqli_stmt_execute($stmt5);
 					mysqli_stmt_close($stmt5);
 					//if visitor pay, it becomes subscribedUser
-				}
-			
+					
+					$selectNewDayLeft = "SELECT daysLeft FROM member WHERE email=?  ;";
+				
+					if($stmt6 = mysqli_prepare($link, $selectNewDayLeft))
+					{
+						mysqli_stmt_bind_param($stmt6,"s", $_COOKIE["email"]);
+	
+						mysqli_stmt_execute($stmt6);
+					
+						mysqli_stmt_bind_result($stmt6, $dayLeft);
+					
+						while (mysqli_stmt_fetch($stmt6)) {
+							$newDateLeft = $dayLeft;
+						}
+						mysqli_stmt_close($stmt6);
+						
+						setcookie("daysLeft", $newDateLeft, time() + 3600);
+				
+						echo "<script>alert('Your payment record is created. Enjory Learning Sign Language.')</script>";
+						
+					}else
+					{
+						echo "Server Error, Please contact with our administrator. ";
+					}
+					
+					
+			}else 
+			{
+				echo "Server Error, Please contact with our administrator. ";
+			}
 				
 				
-				echo "<script>alert('Your payment record is created. Enjory Learning Sign Language.')</script>";
 	
 			}else 
 			{
