@@ -19,30 +19,49 @@ input[type=submit]:hover{
 }
 
 .defaultTable{
-	width: 1600px;
+	width: 1080px;
 	border: 0px;
 	margin: 50px;
 }
 
 .defaultTable td{
-	width:400px;
+	width:25%;
 	height:50px;
-	font-size:18px;
+	font-size:16px;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;	
+}
+
+.defaultTable th{
+	width:25%;
+	height:50px;
+	font-size:16px;
+	font-weight:bold;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;	
 }
 
 .top{
-	position: fixed;
+	
 	top: 20px;
-	left: 20px;
+	text-align: left; 
+	font-size: 0; 
+	letter-spacing: 0px; 
+	word-spacing: -4px;
+
+ 	
 }
 
 .top li{
-	float:left;
-	display: inline;
-	padding: 10px;
+	display: inline-block; 
+	*display: inline; 
+	zoom:1; 
+	letter-spacing: normal; 
+	word-spacing: normal;
+	padding:30px;
 	font-size: 20px;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	background-color: transparent;
+	opacity:0.8;
+	
 }
 
 .top ul{
@@ -67,18 +86,18 @@ a:link{
 		text-decoration: none;
 }
 	
-a:hover{color:grey;}
+a:hover{color:grey;opacity: 0.5;}
 
 #pic1{
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
-		margin-top: 100px;
+		margin-top: -10px;
 	 }
 	 
 .search{
 		text-align: center;
-		margin-bottom: 320px;
+		margin-bottom: 20px;
 		color: #555555;			
 		}
 		
@@ -95,7 +114,7 @@ a:hover{color:grey;}
 	}
 
 .bottom{
-		position: fixed;
+		float:right;
 		bottom: 40px;
 		right: 20px;
 }

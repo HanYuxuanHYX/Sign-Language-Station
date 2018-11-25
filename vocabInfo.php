@@ -1,5 +1,5 @@
 <?php
-	if(!isset($_COOKIE["email"])){
+	if(!isset($_COOKIE["username"])){
 		header("Location: login.php");
 		exit;
 	}
@@ -108,13 +108,64 @@ function add(){
 		});
 }
 </script>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<style>
+		
+		h1{
+			font-size: 40px;
+			font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+		}
+		p{
+			color: #80dfff;
+			font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+			font-size:16px;
+		}
+		#addToGlossary{
+			width:600px;
+			margin-left: auto;
+			margin-right: auto;
+			font-size: 16px;
+		}
+		
+		.video{
+			width:600px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	</style>
+</head>
 
 <body>
 	<?php require('header.php');?>
 
 	<div class="mainFrame">
-    	<h1><?php echo $vocabName;?></h1>
+		
+		
+		
+    	<h1 align="center"><?php echo $vocabName;?></h1>
+    	<p align="center">Description:<?php echo $description;?></p>
+    	
+    	<div id="addToGlossary">
+    		<img src = "img/click.png">
+    			<span>
+    				<?php 
+			if($alreadyAddToGlossary){
+				echo "Added";
+			}else{
+				echo "<a href='javascript:add()'>Add to my vocabulary list!</a>";
+			}
+		?>
+    			</span>
+        
+        </div>
+    	<div class = "video">
+    		<video width="600" height="600"controls>
+    			
+ 		 <source src="<?php echo $videoSource;?>" type="video/mp4">
+		</video><br><br>
+			
+		</div>
+    	
     	<table class="defaultTable">
 			<tr>
 				<td>Uploader:</td>
@@ -127,29 +178,14 @@ function add(){
 			</tr>
 
 			<tr>
-				<td>description:</td>
-       			<td><?php echo $description;?></td>
-			</tr>
-
-			<tr>
 				<td>checkTotal:</td>
        			<td><?php echo $checkTotal;?></td>
 			</tr>
 		</table>
             
-        <video width="600" height="600" controls>
- 		 <source src="<?php echo $videoSource;?>" type="video/mp4">
-		</video><br><br>
         
-        <div id="addToGlossary">
-        <?php 
-			if($alreadyAddToGlossary){
-				echo "Added";
-			}else{
-				echo "<a href='javascript:add()'>Add to my vocabulary list!</a>";
-			}
-		?>
-        </div>
+        
+        
 	</div>
 	
 	<?php require('footer.php');?>

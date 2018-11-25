@@ -31,9 +31,8 @@ function DropDown(){
 
 <body>
 	<?php require('header.php');?>
-
+	<img id ="pic1" src = "img/Sign-L_COVER.png" /><br>
 	<div class="search">
-        <img id ="pic1" src = "img/sl_new.png" /><br>
 	  	<form id="form1" name="form1" method="get" action="vocabInfo.php">
 	  	<input type="text" list="searchList" name="content" id="content" placeholder="search..."> 
         <datalist id="searchList">
