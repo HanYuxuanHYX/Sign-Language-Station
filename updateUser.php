@@ -47,7 +47,7 @@ th{
 <body>
 	<?php require('header.php');?>
 	<div class="mainFrame">
-	<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search email.." >
+	<input type="text" id="myInput" onKeyUp="myFunction()" placeholder="Search email.." >
 	<table id="myTable" width=auto;>
 	  <tr>
 	    <th width="300px"><strong>email</strong></th>
@@ -70,7 +70,7 @@ th{
     	// output data of each row
 	    while($row = mysqli_fetch_assoc($result)) {
 	        echo '<tr><td>' . $row["email"]. '</td><td>'
-			. $row["userName"].'</td><td>'
+			. $row["username"].'</td><td>'
 			. $row["password"]. '</td><td>'
 			. $row["birthday"]. '</td><td>'
 			. $row["disability"]. '	</td><td>'

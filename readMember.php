@@ -50,7 +50,7 @@ th{
 	<div class="mainFrame">
 
 
-	<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search userName.." ><br>
+	<input type="text" id="myInput" onKeyUp="myFunction()" placeholder="Search userName.." ><br>
 	All Users:
 
 	<table id="myTable" width=auto;>
@@ -73,7 +73,7 @@ th{
 	    while($row = mysqli_fetch_assoc($result)) {
 	        echo '<tr><td>' 
 	        . $row["email"]. '</td><td>' 
-	        . $row["userName"].'</td><td>' 
+	        . $row["username"].'</td><td>' 
 	        . $row["password"]. '</td><td>' 
 	        . $row["birthday"]. '</td><td>' 
 	        . $row["disability"]. '</td><td>' 
