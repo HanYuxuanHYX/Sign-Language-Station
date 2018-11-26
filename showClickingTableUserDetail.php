@@ -1,6 +1,8 @@
 <?php
+
 	session_start();
 	require_once 'connect_db.php';
+
 	if(!isset($_COOKIE["username"]) && !isset($_COOKIE["email"]) )
 		header("Location: login.php");
 	
@@ -15,6 +17,7 @@
 	$smonethStart = $vmonth ."-01";
 	$svocabID = $_POST['svocabID'];
 	
+
 	
 	echo "
 	  <body>
@@ -24,7 +27,8 @@
             var vocabUserData = new google.visualization.DataTable();
              vocabUserData.addColumn('string', 'Vocabulary Name ');
             vocabUserData.addColumn('string', 'Vocabulary ID');
-            vocabUserData.addColumn('string', 'Check Time');
+			vocabUserData.addColumn('string', 'Number of Checking');
+            vocabUserData.addColumn('string', 'Check Date');
 			vocabUserData.addColumn('string', 'User Email');
 			vocabUserData.addColumn('string', 'User Name');
 			vocabUserData.addColumn('string', 'User Birthday');
@@ -35,10 +39,10 @@
             vocabUserData.addRows([";
 			require_once 'connect_db.php';
 					
-					$findVocabDetail = "SELECT checkinghistory.vocabName, checkinghistory.vocabId, checkinghistory.checkTime,  member.email , member.userName , member.birthday, member.disability, member.title, member.registerDate, member.daysLeft
+					$findVocabDetail = "SELECT checkinghistory.vocabName, checkinghistory.vocabId, COUNT(checkinghistory.email) AS checkNumber,checkinghistory.checkTime,  member.email , member.userName , member.birthday, member.disability, member.title, member.registerDate, member.daysLeft
 FROM member, checkinghistory 
 WHERE member.email = checkinghistory.email 
-AND checkinghistory.checkTime >= ? AND checkinghistory.checkTime <= ? AND checkinghistory.vocabId = ? ;";
+AND checkinghistory.checkTime >= ? AND checkinghistory.checkTime <= ? AND checkinghistory.vocabId = ?  GROUP BY checkinghistory.email ORDER BY checkNumber DESC ;";
 					
 					if($stmt = mysqli_prepare($link, $findVocabDetail))
 					{
@@ -47,11 +51,12 @@ AND checkinghistory.checkTime >= ? AND checkinghistory.checkTime <= ? AND checki
 						
 						mysqli_stmt_execute($stmt);
 						
-						 mysqli_stmt_bind_result($stmt, $vocabName , $vocabId, $checkTime, $email, $userName, $birthday, $disability, $title, $registerDate, $daysLeft   );
+						 mysqli_stmt_bind_result($stmt, $vocabName , $vocabId, $checkNumber, $checkTime, $email, $userName, $birthday, $disability, $title, $registerDate, $daysLeft   );
 						 
 						 while(mysqli_stmt_fetch($stmt)){
-								echo "['".$vocabName."', '".$vocabId."', '".$checkTime."', '".$email."', '".$userName."', '".$birthday."', '".$disability."', '".$title."', '".$registerDate."', '".$daysLeft."'],";
+								echo "['".$vocabName."', '".$vocabId."', '".$checkNumber."', '".$checkTime."', '".$email."', '".$userName."', '".$birthday."', '".$disability."', '".$title."', '".$registerDate."', '".$daysLeft."'],";
 							}
+
 						mysqli_stmt_close($stmt);
 						
 						mysqli_close($link);
@@ -59,6 +64,7 @@ AND checkinghistory.checkTime >= ? AND checkinghistory.checkTime <= ? AND checki
 					{
 						echo "Cannot obtain the user information. Please connect to the IT department.";
 					}
+
 	echo "]);";
 	
 	echo "var checkingHistoryUserOptions = {
