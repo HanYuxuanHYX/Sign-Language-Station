@@ -12,10 +12,11 @@ if(isset($_POST["register"])){
 		$token = md5($username . $email . $password . $registerDate);
 		$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
 		mysqli_select_db($db,"18012633x");
-		$sql = "INSERT INTO member(email,username,password,birthday,disability,title,registerDate,token,activated,icon,daysLeft)" . 
-			   "VALUES('" . $email . "','" . $username . "','" . $password . "','" . $birthday . "','" . $disability . "','" .
-			   "visitor" . "','" . $registerDate . "','" . $token . "','" . 0 .  "','" . "Iconpath" . "','" . 30 . "')";
-		mysqli_query($db,$sql) or die("SQL error!<br>");
+		$sql = $db->prepare("INSERT INTO member
+							(email,username,password,birthday,disability,title,registerDate,token,activated,icon,daysLeft)
+							VALUES(?,?,?,?,?,'visitor',?,?,0,'Iconpath',30)");
+		$sql->bind_param("sssssss",$email,$username,$password,$birthday,$disability,$registerDate,$token);
+		$sql->execute();
 		mysqli_close($db);
 		
 		$subject = "[Sign Language Station] Confirm your email address";

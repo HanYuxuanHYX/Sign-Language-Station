@@ -39,6 +39,18 @@
 					require_once 'connect_db.php';
 					if(!isset($_COOKIE["username"]) && !isset($_COOKIE["email"]) )
 							header("Location: login.php");
+							
+						$sql1 = "SELECT * FROM permission 
+			WHERE title='" . $_COOKIE["title"] . "'";
+	$result1 = mysqli_query($link,$sql1) or die("SQL error!<br>");
+	$row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC);
+	
+	if($row1["statistics"]==0){
+		mysqli_close($link);
+		echo "<script>alert('You do not have the authority to do this!');
+		window.location.href='adminFunctions.php';</script>";
+		exit;
+	}
 	
 					$findVocab = "SELECT vocabId, vocabName, checkTotal FROM vocabulary;";
 					

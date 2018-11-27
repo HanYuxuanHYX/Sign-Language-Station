@@ -9,6 +9,7 @@
 	$result1 = mysqli_query($conn,$sql1) or die("SQL error!<br>");
 	$row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC);	
 	if($row1["writeMember"]==0){
+		mysqli_close($db);
 		echo "<script>alert('You do not have the authority to do this!');
 		window.location.href='adminFunctions.php';</script>";
 	}

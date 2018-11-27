@@ -8,8 +8,10 @@ $newEmail = $_SESSION["newEmail"];
 if($token == $_SESSION["token"]){
 	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
 	mysqli_select_db($db,"18012633x");
-	$sql = "UPDATE member SET email='" . $newEmail . "' WHERE email='" . $email . "'";			
-	mysqli_query($db,$sql) or die("SQL error!<br>");
+	
+	$sql = $db->prepare("UPDATE member SET email=? WHERE email=?");
+	$sql->bind_param("ss",$newEmail,$email);
+	$sql->execute();
 	
 	mysqli_close($db);
 	setcookie("email", $newEmail, time() + 3600);

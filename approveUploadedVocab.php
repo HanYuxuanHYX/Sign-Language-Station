@@ -14,9 +14,10 @@
 	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
 	mysqli_select_db($db,"18012633x");
 	
-	$sql1 = "SELECT * FROM permission 
-			WHERE title='" . $_COOKIE["title"] . "'";
-	$result1 = mysqli_query($db,$sql1) or die("SQL error!<br>");
+	$sql1 = $db->prepare("SELECT * FROM permission WHERE title=?");
+	$sql1->bind_param('s',$_COOKIE["title"]);
+	$sql1->execute();
+	$result1 = $sql1->get_result();
 	$row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 	
 	if($row1["editUnapprovedVocab"]==1){

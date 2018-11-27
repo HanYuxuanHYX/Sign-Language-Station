@@ -43,9 +43,10 @@
 			$vocabName = $_POST["vocabName"];
 			$description = $_POST["descri"];
 
-			$sql = "insert into vocabulary(submitter,approver,status,vocabName,description,videoSource,checkTotal,addTotal)
-			values('$submitter','tmp','unapproved','$vocabName','$description','videos/" . $_FILES["file"]["name"] . "','0','0')";
-			if(mysqli_query($db,$sql)){
+			$sql = $db->prepare("insert into vocabulary(submitter,approver,status,vocabName,description,videoSource,checkTotal,addTotal)
+			values(?,'tmp','unapproved',?,?,'videos/" . $_FILES["file"]["name"] . "','0','0')");
+			$sql->bind_param("sss",$submitter,$vocabName,$description);
+			if($sql->execute()){
 				echo "<script>alert('Your submission has successfully sent to the admins of the website! Thanks for your effort!')</script>";
 			} else {
     			echo "Error: " . $sql . "<br>" . mysqli_error($db);

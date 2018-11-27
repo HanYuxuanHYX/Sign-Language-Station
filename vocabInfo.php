@@ -24,26 +24,31 @@
 	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
 	mysqli_select_db($db,"18012633x");
 	
-	$sql0 = "SELECT * FROM permission 
-			WHERE title='" . $_COOKIE["title"] . "'";
-	$result0 = mysqli_query($db,$sql0) or die("SQL error!<br>");
+	$sql0 = $db->prepare("SELECT * FROM permission WHERE title=?");
+	$sql0->bind_param("s",$_COOKIE["title"]);
+	$sql0->execute();
+	$result0 = $sql0->get_result();
 	$row0 = mysqli_fetch_array($result0, MYSQLI_ASSOC);
 	
 	if($row0["readVocab"]==0){
+		mysqli_close($db);
 		echo "<script>alert('Your trial period has expired, please subscribe a plan to continue visit this website.');
 		window.location.href='index.php';</script>";
 	}
 	
-	$sql = "SELECT * FROM vocabulary WHERE vocabName ='" . $content . "'";
+	$sql_string = "SELECT * FROM vocabulary WHERE vocabName=?";
 	
 	if($hasVideo){
-		$sql = $sql . " AND videoSource!=''";
+		$sql_string = $sql_string . " AND videoSource!=''";
 	}
 	if($onlyApproved){
-		$sql = $sql . " AND status='approved'";
+		$sql_string = $sql_string . " AND status='approved'";
 	}
 	
-	$result = mysqli_query($db,$sql) or die("SQL error!<br>");
+	$sql = $db->prepare($sql_string);
+	$sql->bind_param("s",$content);
+	$sql->execute();	
+	$result = $sql->get_result();
 	$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 	if($row!=false){
 		$vocabId = $row['vocabId'];

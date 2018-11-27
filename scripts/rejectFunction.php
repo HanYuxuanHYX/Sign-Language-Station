@@ -5,5 +5,5 @@
 	$sql = "DELETE FROM vocabulary WHERE vocabId ='" . $vocabId . "'";
 	mysqli_query($db,$sql) or die("SQL error!<br>");
 	mysqli_close($db);
-	header("Location: approveUploadedVocab.php")
+	header("Location: ../approveUploadedVocab.php")
 ?>

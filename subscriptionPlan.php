@@ -14,17 +14,18 @@ table {
     border-style: dotted;
     padding: 7px;
     border-radius: 10px;
+	text-align:center;
 }
 td {
     border: 2px solid black;
     padding: 7px;
-    border-color: red;
+    border-color: #09F;
     font: 18px fantasy;
     height: 200px
 }
 th {
-    color: red;
-    background-color: yellow;
+    color: black;
+    background-color:#09F;
     font: 40px fantasy;
     text-shadow: 2px 3px green;
     border: 2px solid black;
@@ -32,9 +33,9 @@ th {
     
 }
 h1.round{
-	border: 2px solid red;
+	border: 2px solid #09F;
     border-radius: 15px;
-    text-shadow: 2px 2px 5px red;
+    text-shadow: 2px 2px 5px #09F;
 }
 .button {
     background-color: #4CAF50; /* Green */
@@ -52,7 +53,7 @@ h1.round{
 }
 .button1 {
     background-color: white; 
-    color: red; 
+    color: #09F; 
     border: 2px solid #f44336;
     font: 40px fantasy;
 }
@@ -122,7 +123,7 @@ if (mysql_num_rows($result3) > 0) {
 <h3><center>Choose Your Own Plan for 30% off.</center></h3>
 <p><center>Discont only avalibale for Today!!!</center></p>
 
-<table class="defaultTable">
+<table class="defaultTable" align="center">
   <tr>
     <th>Plan 1</th>
     <th>Plan 2</th> 
