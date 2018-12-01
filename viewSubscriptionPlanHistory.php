@@ -31,13 +31,13 @@
 				};
 	</script>
       <script type = "text/javascript">
-         google.charts.load('current', {packages: ['corechart','line']});  
+         google.charts.load('current', {packages: ['corechart']});  
       </script>
    </head>
 
    <body>
    	<?php require('header.php');?>
-      <div id = "container" style = "width: 1050px; height: 600px; margin: 70 auto">
+      <div id = "container" style = "width: 1050px; height: 600px; margin: 70 auto ">
       </div>
       <script language = "JavaScript">
          function drawChart() {
@@ -47,6 +47,7 @@
             data.addColumn('number', 'Plan 1');
             data.addColumn('number', 'Plan 2');
             data.addColumn('number', 'Plan 3');
+			data.addColumn('number', 'Average');
             data.addRows([
               <?php
 					session_start();
@@ -54,16 +55,16 @@
 					if(!isset($_COOKIE["username"]) && !isset($_COOKIE["email"]) )
 							header("Location: login.php");
 	
-					$findPlanRecord = "SELECT CONCAT(YEAR(paymentTime),'-',MONTH(paymentTime)) AS Month , GROUP_CONCAT(planId order by planId SEPARATOR ';' ) AS PlanIDGroup FROM payment WHERE paymentTime between DATE_SUB(now(), INTERVAL 12 MONTH) and now() GROUP BY YEAR(paymentTime), MONTH(paymentTime);";
+					$findPlanRecord = "SELECT CONCAT(YEAR(paymentTime),'-',MONTH(paymentTime)) AS Month , GROUP_CONCAT(planId order by planId SEPARATOR ';' ) AS PlanIDGroup, (COUNT(planId)/COUNT(DISTINCT(planId))) AS Average FROM payment WHERE paymentTime between DATE_SUB(now(), INTERVAL 12 MONTH) and now() GROUP BY YEAR(paymentTime), MONTH(paymentTime);";
 					
 					if($stmt = mysqli_prepare($link, $findPlanRecord))
 					{
 						mysqli_stmt_execute($stmt);
 						
-						 mysqli_stmt_bind_result($stmt, $month, $groupPlanId);
+						 mysqli_stmt_bind_result($stmt, $month, $groupPlanId, $groupAverage);
 						 
 						 while(mysqli_stmt_fetch($stmt)){
-								echo "['".$month."', ".substr_count($groupPlanId, '1').", ".substr_count($groupPlanId, '2').", ".substr_count($groupPlanId, '3')."],";
+								echo "['".$month."', ".substr_count($groupPlanId, '1').", ".substr_count($groupPlanId, '2').", ".substr_count($groupPlanId, '3').", ".$groupAverage."],";
 							}
 						mysqli_stmt_close($stmt);
 						
@@ -84,9 +85,11 @@
                'width':1050,
                'height':600,
                pointsVisible: true,
-			   backgroundColor: 'transparent'
+			   backgroundColor: 'transparent',
+			   seriesType: 'bars',
+               series: {3: {type: 'line'}}
             };
-            var chart = new google.visualization.LineChart(document.getElementById('container'));
+            var chart = new google.visualization.ComboChart(document.getElementById('container'));
             
         function selectHandler() {
           var selectedItem = chart.getSelection()[0];
@@ -94,8 +97,9 @@
             var month = data.getValue(selectedItem.row,0);
             var planid = data.getColumnLabel(selectedItem.column);
             planid = planid.replace( /^\D+/g, '');
-            
-			$(function(){
+			if(!(planid == null || planid == "") )
+			{
+				$(function(){
 				$.ajax({
 						type: "POST",
 						url: 'viewSubscriptionPlanHistoryDetail.php',
@@ -108,6 +112,7 @@
 					   }
 				});
 			});
+			}
           }
         }
             google.visualization.events.addListener(chart, 'select', selectHandler);    
@@ -117,8 +122,7 @@
          google.charts.setOnLoadCallback(drawChart);
       </script>
 	 
-	 <div id='displayTable'></div>
-	 
+	 <div id='displayTable'  style='padding-bottom: 100px'></div>
 	 <?php require('footer.php');?>
    </body>
 </html>
