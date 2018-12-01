@@ -75,88 +75,66 @@ $servername = "sdmysql.comp.polyu.edu.hk";
 $username = "18012633x";
 $password = "sqgqcbvd";
 $dbname = "18012633x";
+
 // Create connection
-$conn = mysql_connect($servername, $username, $password);
+$conn = mysqli_connect($servername, $username, $password);
 // Check connection
 if (!$conn) {
     die("Connection failed: " . mysql_connect_error());
 }
-mysql_select_db($dbname, $conn);
-$sql1 = "SELECT price
-FROM subscriptionplan
-WHERE planId=1;";
-$sql2 = "SELECT price
-FROM subscriptionplan
-WHERE planId=2;";
-$sql3 = "SELECT price
-FROM subscriptionplan
-WHERE planId=3;";
-$result1 = mysql_query($sql1, $conn);
-if (mysql_num_rows($result1) > 0) {
-    // output data of each row
-    while($row = mysql_fetch_assoc($result1)) {
-        $price1= $row["price"];
+mysqli_select_db($conn, $dbname);
+$sql = "SELECT planId, month, price  FROM subscriptionplan";
+
+$array_planId = array();
+$array_month = array();
+$array_price = array();
+
+$result = mysqli_query( $conn, $sql);
+if (mysqli_num_rows($result) > 0) {
+    while($row = mysqli_fetch_assoc($result)) {
+		$array_planId[] = $row["planId"];
+		$array_month[] = $row["month"];
+		$array_price[] =  $row["price"];
     }
 }
-$result2 = mysql_query($sql2, $conn);
-if (mysql_num_rows($result2) > 0) {
-    // output data of each row
-    while($row = mysql_fetch_assoc($result2)) {
-        $price2= $row["price"];
-    }
-}
-$result3 = mysql_query($sql3, $conn);
-if (mysql_num_rows($result3) > 0) {
-    // output data of each row
-    while($row = mysql_fetch_assoc($result3)) {
-        $price3= $row["price"];
-    }
-}
+mysqli_free_result($result);
+mysqli_close($conn);
+
 ?>
 
 
 <body>
 <?php require('header.php');?>
-<div class="mainFrame">
+<div class="mainFrame" style='padding-top: 60px' >
 
 <h1 class="round"><center>Subscription Plan</center></h1>
 <h3><center>Choose Your Own Plan for 30% off.</center></h3>
 <p><center>Discont only avalibale for Today!!!</center></p>
 
-<table class="defaultTable" align="center">
+<table class="defaultTable" align="center" style='margin: auto'>
   <tr>
-    <th>Plan 1</th>
-    <th>Plan 2</th> 
-    <th>Plan 3</th>
+	<?php 
+	
+	$planNum = count($array_planId);
+	for($i = 0; $i < $planNum; $i++) {
+			echo "<th>Plan ". $array_planId[$i]. "<br>Month: ". $array_month[$i] . "</th>";
+			
+	}
+	?>
   </tr>
   <tr>
-    <td>Original:<?php echo $price1*1.5;?><br />
-	<form action="payment.php" method="post">
-		Now:<?php echo $price1;?><br />
-        <input class="button button1" type="submit" value="Click Me!" >  
-		<input type="hidden" name="planId" value='1'>
-		<input type="hidden" name="price" value=<?php echo $price1 ?>>
-        </input>
-    </td>
-	</form>
-	<form action="payment.php" method="post">
-    <td>Original:<?php echo $price2*1.5;?><br />
-	Now:<?php echo $price2;?><br />
-        <input class="button button1" type="submit" value="Click Me!" >  
-		<input type="hidden" name="planId" value='2'>
-		<input type="hidden" name="price" value=<?php echo $price2 ?>>    
-        </input>
-    </td>
-	</form>
-	<form action="payment.php" method="post">
-    <td>Original:<?php echo $price3*1.5;?><br />
-	Now:<?php echo $price3;?><br />
-        <input class="button button1" type="submit" value="Click Me!">
-        <input type="hidden" name="planId" value='3'>
-		<input type="hidden" name="price" value=<?php echo $price3 ?>>    
-        </input></a>
-    </td>
-	</form>
+	<?php
+		for($i = 0; $i < $planNum; $i++) {
+				echo "<td>Original:". $array_price[$i] * 1.5 ."<br />";
+				echo "<form action='payment.php' method='post'>";
+				echo "Now:".$array_price[$i] ."<br />";
+				echo "<input class='button button1' type='submit' value='Click Me!' >  ";
+				echo "<input type='hidden' name='planId' value='". $array_planId[$i]. "'>";
+				echo "<input type='hidden' name='price' value=". $array_price[$i].">";
+				echo "</input></td></form>";
+		}
+		
+	?>
   </tr>
 
 </table>
