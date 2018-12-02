@@ -117,7 +117,7 @@ mysqli_close($conn);
 	
 	$planNum = count($array_planId);
 	for($i = 0; $i < $planNum; $i++) {
-			echo "<th>Plan ". $array_planId[$i]. "<br>Month: ". $array_month[$i] . "</th>";
+			echo "<th>Plan ". $array_planId[$i]. "<br>Duration : Month ". $array_month[$i] . "</th>";
 			
 	}
 	?>
