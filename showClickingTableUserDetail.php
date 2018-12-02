@@ -55,7 +55,6 @@ AND checkinghistory.checkTime >= ? AND checkinghistory.checkTime <= ? AND checki
 							}
 						mysqli_stmt_close($stmt);
 						
-						mysqli_close($link);
 					}else
 					{
 						echo "Cannot obtain the user information. Please connect to the IT department.";
@@ -76,7 +75,59 @@ AND checkinghistory.checkTime >= ? AND checkinghistory.checkTime <= ? AND checki
 			
 			}
 			google.charts.setOnLoadCallback(drawTableUserChart);
+			
+			
+			
+			
 			</script>
-			</body>";
+			<div id = 'vocabCheckingUserDetailPieContainer' style = 'width: 900px; height: 500px; margin: auto'></div>
+			<script language = 'JavaScript'>
+					function drawTableUserPieChart() {
+						var pieData = google.visualization.arrayToDataTable([
+							['Disability', 'User Number'],";
+							require_once 'connect_db.php';
+					
+							$findVocabPieDetail = "SELECT DISTINCT(member.disability), COUNT(member.disability) FROM member, checkinghistory  WHERE member.email = checkinghistory.email 
+							AND checkinghistory.checkTime >= ? AND checkinghistory.checkTime <= ? AND checkinghistory.vocabId = ?  
+							GROUP BY member.disability";
+							
+							if($stmt2 = mysqli_prepare($link, $findVocabPieDetail))
+							{
+						
+								mysqli_stmt_bind_param($stmt2, "sss",  $smonethStart, $smonethEnd, $svocabID);
+						
+								mysqli_stmt_execute($stmt2);
+						
+								mysqli_stmt_bind_result($stmt2, $disabilityName, $countDisability   );
+						 
+								while(mysqli_stmt_fetch($stmt2)){
+										echo "['".$disabilityName."', ".$countDisability."],";
+								}
+								mysqli_stmt_close($stmt2);
+						
+								mysqli_close($link);
+							}else
+							{
+								echo "Cannot obtain the user information. Please connect to the IT department.";
+							}	
+							
+							
+						echo "]);";
+						
+						echo "var pieOptions = {
+										title: 'The Proportion of user with different disability to search word : ".$vocabName."',
+										is3D: true
+									};";
+						
+						
+						echo "var pieChart = new google.visualization.PieChart(document.getElementById('vocabCheckingUserDetailPieContainer'));";
+						
+						echo "pieChart.draw(pieData, pieOptions);";
+						
+						echo "}";
+						echo "google.charts.setOnLoadCallback(drawTableUserPieChart);";
+						
+			echo "</script>";
+			echo "</body>";
 			
 ?>

@@ -21,6 +21,7 @@
          google.charts.load('current', {packages: ['table']});     
 		 google.charts.load('current', {packages: ['corechart','line']});
 		 google.charts.load('current', {'packages':['corechart', 'controls']});
+		 google.charts.load('current', {'packages':['corechart']});
       </script>
       </script>
    </head>
