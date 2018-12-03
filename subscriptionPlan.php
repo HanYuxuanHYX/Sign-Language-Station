@@ -109,7 +109,7 @@ mysqli_close($conn);
 
 <h1 class="round"><center>Subscription Plan</center></h1>
 <h3><center>Choose Your Own Plan for 30% off.</center></h3>
-<p><center>Discont only avalibale for Today!!!</center></p>
+<p><center>Discount only avalibale for Today!!!</center></p>
 
 <table class="defaultTable" align="center" style='margin: auto'>
   <tr>
