@@ -42,6 +42,7 @@ function DropDown(){
 	      <td><strong>remained subscription time</strong></td>
 	      <td><?php echo $_COOKIE["daysLeft"]?></td>
 	      <td><a href="subscriptionPlan.php">make a subscription</a></td>
+		  <td><a href='personalSubscriptionPlanHistory.php'>review subscription history</a></td>
         </tr>
 	    <tr>
 	      <td><a href="logout.php">log out</a></td>
