@@ -99,7 +99,6 @@
 								'showRowNumber': 'true',
 				}
 			});
-
 			 dashboard.bind(stringFilter, vocabTable);
 						
 			function selectHandler() {

@@ -41,7 +41,6 @@
       </div>
       <script language = "JavaScript">
          function drawChart() {
-
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Month');
             data.addColumn('number', 'Plan 1');

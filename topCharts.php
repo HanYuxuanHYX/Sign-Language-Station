@@ -24,20 +24,7 @@ Order By totalSubmit DESC
 	$result2 = mysqli_query($db,$sql2);
 	
 
-	$sql3 = "select userName, email, daysLeft
-from member
-where member.daysLeft < 30
-order by daysLeft";
-	$result3 = mysqli_query($db,$sql3);
-	
-	$sql4 = "select member.userName, member.email, sum(price)
-from subscriptionplan, payment, member
-where subscriptionplan.planId = payment.planId
-and payment.email = member.email
-group by member.email
-order by sum(price) DESC";
-	$result4 = mysqli_query($db,$sql4);
-	
+		
 	
 	mysqli_close($db);	
 	
@@ -127,59 +114,7 @@ function DropDown(){
     echo "No result!";
 }?>
 
-	<hr>
-	<h3>The sorted dayleft of users:</h3>
-	<?php
-	if (mysqli_num_rows($result3) > 0){
-		echo'<ol>';
-		for($x = 0;$x<5;$x++){
-			$row = mysqli_fetch_assoc($result3);
-			echo '<li>';
-    	echo "<span style ='font:15px Lucida Sans Unicode, Lucida Grande, sans-serif;color:#000000'>User Name: </span>";
-    	echo "<span style ='font:15px Lucida Sans Unicode, Lucida Grande, sans-serif;color:#0099cc'>".$row['userName']."</span>";
-    	echo "<br>";
-    	echo "<span style ='font:15px Lucida Sans Unicode, Lucida Grande, sans-serif;color:#000000'>User Email: </span>";
-    	echo "<span style ='font:15px Lucida Sans Unicode, Lucida Grande, sans-serif;color:#0099cc'>".$row['email']."</span>";
-    	echo "<br>";
-    	echo "<span style ='font:15px Lucida Sans Unicode, Lucida Grande, sans-serif;color:#000000'>The days left:</span>";
-    	echo "<span style ='font:15px Lucida Sans Unicode, Lucida Grande, sans-serif;color:#0099cc'>".$row['daysLeft']."</span>";
-    	echo '</li><br>';
-				
-		}
-		echo'</ol>';
-	}
-	else{
-		echo "No result!";
-	}
-		?>
-	<hr>
-		<h3>The customers who spend the most (Top5)</h3>
-		<?php
-			if(mysqli_num_rows($result4)>0){
-				echo'<ol>';
-					for($x=0;$x<5;$x++){
-						$row = mysqli_fetch_assoc($result4);
-						echo'<li>';
-						echo "<span style ='font:15px Lucida Sans Unicode, Lucida Grande, sans-serif;color:#000000'>User Name: </span>";
-    					echo "<span style ='font:15px Lucida Sans Unicode, Lucida Grande, sans-serif;color:#0099cc'>".$row['userName']."</span>";
-    					echo "<br>";
-    					echo "<span style ='font:15px Lucida Sans Unicode, Lucida Grande, sans-serif;color:#000000'>User Email: </span>";
-    					echo "<span style ='font:15px Lucida Sans Unicode, Lucida Grande, sans-serif;color:#0099cc'>".$row['email']."</span>";
-    					echo "<br>";
-    					echo "<span style ='font:15px Lucida Sans Unicode, Lucida Grande, sans-serif;color:#000000'>Total money the user spend:</span>";
-    					echo "<span style ='font:15px Lucida Sans Unicode, Lucida Grande, sans-serif;color:#0099cc'>".$row['sum(price)']."</span>";
-    					echo '</li><br>';
-							
-					}
-					echo'</ol>';
-			}
-			else{
-				echo "No result!";
-			}
-			?>
-	
-		
-
+			
 		
 	
 	<?php require('footer.php');?>

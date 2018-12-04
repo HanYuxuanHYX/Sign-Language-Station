@@ -97,11 +97,9 @@ $(document).ready(function(){
         	});
 	});
 })
-
 function DropDown(){
 	$(".dropDownContent").slideToggle("fast");
 };
-
 function add(){
 	$.post("scripts/addToGlossary.php",
         {

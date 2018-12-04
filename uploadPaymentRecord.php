@@ -1,6 +1,7 @@
 <?php 
 session_start();
 require_once 'connect_db.php';
+require_once 'PHPMailer/sendEmail.php';
 if(!isset($_COOKIE["username"]) && !isset($_COOKIE["email"]) )
 		header("Location: login.php");
 $planID = $_POST['planId'];
@@ -81,8 +82,15 @@ if($stmt = mysqli_prepare($link, $updateCreditCardQuery))
 						
 						setcookie("daysLeft", $newDateLeft, time() + 3600);
 				
-						echo "<script>alert('Your payment record is created. Enjory Learning Sign Language.')</script>";
-						
+						echo "<script>alert('Your payment record is created. Enjory Learning Sign Language.');
+							window.location.href='index.php';</script>";
+
+
+						$subject = "[Sign Language Station]Thanks for your purchase!";
+						$body = "<h1>Thanks for your purchase!</h1><br>
+    						<h2>You have successfully purchased subscription plan[" . $planID . "]. The validity time of your account has been extended to ["  .  $newDateLeft . "] days!</h2><br>";
+						sendEmail($_COOKIE['email'],$subject,$body);
+
 					}else
 					{
 						echo "Server Error, Please contact with our administrator. ";
@@ -118,5 +126,4 @@ if($stmt = mysqli_prepare($link, $updateCreditCardQuery))
 echo "The server cannot process your payment.\nPlease try it again or connect with our administrator. ";
 }
 mysqli_close($link);
-require("index.php");
 ?>

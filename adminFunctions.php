@@ -26,7 +26,9 @@ function DropDown(){
 		<td><a class="modifyCustomerLink" href="updateUser.php"> Write Member</a></td></tr>
 	<tr><td><b>statistics:</b></td></tr>
 	<tr><td><a class="viewPaymentRecordLink" href="viewSubscriptionPlanHistory.php"> Payment Record </a></td>
-		<td><a class="showClickingTableLink" href="showClickingTable.php"> Checking History For Each Vocab</a></td></tr>
+		<td><a class="showClickingTableLink" href="showClickingTable.php"> Checking History For Each Vocab</a></td>
+		<td><a class = "AdvancedUserStatistics" href = "advancedUserStatistics.php"> Checking Advanced User Information</a></td>
+</tr>
         </tbody>
         </table>
 

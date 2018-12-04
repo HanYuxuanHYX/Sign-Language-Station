@@ -96,7 +96,6 @@ function DropDown(){
 					dashboard_p.bind(dateRangeFilter, ppaymentTable);
 						
 					dashboard_p.draw(data);
-
 		}
 		
 		google.charts.setOnLoadCallback(drawPaymentHistoryChart);
@@ -107,4 +106,3 @@ function DropDown(){
 		<?php require('footer.php');?>
 </body>
 </html>
-
