@@ -18,6 +18,19 @@
 function DropDown(){
 	$(".dropDownContent").slideToggle("fast");
 };
+
+function checkNumberField(value)
+{
+	var inputValueCode = value.keyCode;
+	if(inputValueCode > 48 && inputValueCode <57  )
+	{
+		return true;
+	}else
+	{
+		return false;
+	}
+}
+
 </script>
 </head>
 <body>
@@ -33,31 +46,31 @@ function DropDown(){
 		    <table class="defaultTable">
 			    <tr>
 				    <td><label for="cardnumber">Card number</label></td>
-					<td><input type="text" required name="cardnumber" id="cardnumber" placeholder="0123-4567-8901-2345" maxlength="16"></td>
+					<td><input type="text" required name="cardnumber" id="cardnumber" placeholder="0123456789012345" maxlength='16' minlength='15' onkeypress='return checkNumberField(event)'></td>
 				</tr>
 				
 				<tr>
 				    <td><label for="nameoncard">Card Owner</label></td>
-					<td><input type="text" required name="nameoncard" id="nameoncard" placeholder="Chan Tai Man"></td>
+					<td><input type="text" required name="nameoncard" id="nameoncard" placeholder="Chan Tai Man" required></td>
 				</tr>
 				
 				<tr>
 				    <td><label for="expirydate">Expiry month</label></td>
-					<td><input type="month" required name="expirydate" id="expirydate" placeholder="MM" maxlength="2"></td>
+					<td><input type="month" required name="expirydate" id="expirydate" placeholder="MM" maxlength="2"  min='<?php echo date('Y-m');?>' required></td>
 				</tr>
 				
 
 				
 				<tr>
 				    <td><label for="secuirtycode">Secuirty code</label></td>
-					<td><input type="text" required name="secuirtycode" id="secuirtycode" placeholder="123" maxlength="3"></td>
+					<td><input type="text"  name="secuirtycode" id="secuirtycode" placeholder="123" maxlength="3" minlength="3" onkeypress='return checkNumberField(event)'  required></td>
 				</tr>
 				
 				<tr>				    
-					<input type="radio" name="cardtype" id="cardtype" value="visa"> visa<br>
-					<input type="radio" name="cardtype" id="cardtype" value="amex" > amex<br>
-					<input type="radio" name="cardtype" id="cardtype" value="mastercard" > mastercard<br>
-					<input type="radio" name="cardtype" id="cardtype" value="discover" > discover<br></td>
+					<input type="radio" name="cardtype" id="cardtype" value="visa" required> visa<br>
+					<input type="radio" name="cardtype" id="cardtype" value="amex"  required> amex<br>
+					<input type="radio" name="cardtype" id="cardtype" value="mastercard" required> mastercard<br>
+					<input type="radio" name="cardtype" id="cardtype" value="discover" required> discover<br></td>
 				</tr>
 				
 				<tr>
