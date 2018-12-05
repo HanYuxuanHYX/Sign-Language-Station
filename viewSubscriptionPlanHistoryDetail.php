@@ -33,7 +33,10 @@ $(document).ready(function(){
 session_start();
 require_once 'connect_db.php';
 if(!isset($_POST['smonth']) && !isset($_POST['splanid'])  )
-		header("Location: login.php");
+{
+	mysqli_close($db);
+	header("Location: login.php");
+}
 	
 $smonth = $_POST['smonth'];
 $smonethEnd = $smonth . "-31";
@@ -43,7 +46,7 @@ try
 {
 	$insertCreditCardRecord = "SELECT paymentId, email, planId, paymentTime, paymentPrice FROM  payment WHERE planId = ? AND paymentTime <= ? AND paymentTime >= ? ;";
 	
-	if($stmt = mysqli_prepare($link, $insertCreditCardRecord))
+	if($stmt = mysqli_prepare($db, $insertCreditCardRecord))
 	{
 		mysqli_stmt_bind_param($stmt, "sss", $splanid  ,  $smonethEnd  , $smonethStart);
 		
@@ -83,9 +86,9 @@ try
 	
 } catch(Exception $e) {
 	echo "The server cannot process your advance search.\n";
-	mysqli_rollback($link);
+	mysqli_rollback($db);
 }
-mysqli_close($link);
+mysqli_close($db);
 ?>
 </body>
 </html>

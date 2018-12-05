@@ -1,5 +1,5 @@
 <?php
-	if(!isset($_COOKIE["username"])){
+	if(!isset($_COOKIE["email"])){
 		header("Location: login.php");
 		exit;
 	}
@@ -7,8 +7,8 @@
 	$vocabIdArray = [];
 	$vocabNameArray = [];
 	$checkTimeArray = [];
-	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
-	mysqli_select_db($db,"18012633x");
+	require_once 'connect_db.php';
+	mysqli_select_db($db,$dbName);
 	$sql = "SELECT * FROM checkinghistory WHERE email ='" . $_COOKIE["email"] . "'";
 	$result = mysqli_query($db,$sql) or die("SQL error!<br>");
 	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -16,6 +16,7 @@
 		array_push($vocabNameArray,$row['vocabName']);
 		array_push($checkTimeArray,$row['checkTime']);
 	}
+	mysqli_close($db);	
 ?>
 
 <!doctype html>

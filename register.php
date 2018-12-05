@@ -10,8 +10,8 @@ if(isset($_POST["register"])){
 		
 		$registerDate = date('Y-m-d');
 		$token = md5($username . $email . $password . $registerDate);
-		$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
-		mysqli_select_db($db,"18012633x");
+		require_once 'connect_db.php';
+		mysqli_select_db($db,$dbName);
 		$sql = $db->prepare("INSERT INTO member
 							(email,username,password,birthday,disability,title,registerDate,token,activated,icon,daysLeft)
 							VALUES(?,?,?,?,?,'visitor',?,?,0,'Iconpath',30)");

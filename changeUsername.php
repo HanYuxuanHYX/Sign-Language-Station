@@ -5,8 +5,8 @@ if(isset($_POST["change"])){
 	$username = $_POST["username"];
 	$email = $_COOKIE["email"];
 	
-	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
-	mysqli_select_db($db,"18012633x");
+	require_once 'connect_db.php';
+	mysqli_select_db($db,$dbName);
 	$sql = $db->prepare("UPDATE member SET username=? WHERE email=?");
 	$sql->bind_param("ss",$username,$email);
 	$sql->execute();

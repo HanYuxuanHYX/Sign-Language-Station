@@ -21,8 +21,8 @@
 		$onlyApproved = false;
 	}
 	
-	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
-	mysqli_select_db($db,"18012633x");
+	require_once 'connect_db.php';
+	mysqli_select_db($db,$dbName);
 	
 	$sql0 = $db->prepare("SELECT * FROM permission WHERE title=?");
 	$sql0->bind_param("s",$_COOKIE["title"]);
@@ -119,7 +119,7 @@ function add(){
 			font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 		}
 		p{
-			color: #80dfff;
+			color: darkblue;
 			font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 			font-size:16px;
 		}

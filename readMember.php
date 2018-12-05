@@ -3,8 +3,8 @@
 		header("Location: login.php");
 		exit;
 	}
-	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
-	mysqli_select_db($db,"18012633x");
+	require_once 'connect_db.php';
+	mysqli_select_db($db,$dbName);
 	$sql1 = "SELECT readMember FROM member,permission 
 			WHERE member.title=permission.title AND
 			email='" . $_COOKIE["email"] . "'";
@@ -67,9 +67,10 @@ th{
 			    <th width="100px"><strong>daysLeft</strong></th>
             </tr>
           	<?php 
-	$sql = "SELECT * FROM 18012633x.member;";
+	$sql = "SELECT * FROM member;";
 	$result = mysqli_query($db, $sql);
-	if (mysqli_num_rows($result) > 0) {
+	$No_of_rows=mysqli_num_rows($result);
+	if ($No_of_rows > 0) {
     	// output data of each row
 	    while($row = mysqli_fetch_assoc($result)) {
 	        echo '<tr><td>' 

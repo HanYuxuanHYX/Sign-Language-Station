@@ -69,22 +69,13 @@ if(!isset($_COOKIE["email"])){
 	exit;
 }
 session_start();
-$servername = "sdmysql.comp.polyu.edu.hk";
-$username = "18012633x";
-$password = "sqgqcbvd";
-$dbname = "18012633x";
-// Create connection
-$conn = mysqli_connect($servername, $username, $password);
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysql_connect_error());
-}
-mysqli_select_db($conn, $dbname);
+require_once 'connect_db.php';
+mysqli_select_db($db, $dbName);
 $sql = "SELECT planId, month, price  FROM subscriptionplan";
 $array_planId = array();
 $array_month = array();
 $array_price = array();
-$result = mysqli_query( $conn, $sql);
+$result = mysqli_query( $db, $sql);
 if (mysqli_num_rows($result) > 0) {
     while($row = mysqli_fetch_assoc($result)) {
 		$array_planId[] = $row["planId"];
@@ -93,7 +84,7 @@ if (mysqli_num_rows($result) > 0) {
     }
 }
 mysqli_free_result($result);
-mysqli_close($conn);
+mysqli_close($db);
 ?>
 
 

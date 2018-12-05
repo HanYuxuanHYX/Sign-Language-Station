@@ -41,7 +41,7 @@ FROM member, checkinghistory
 WHERE member.email = checkinghistory.email 
 AND checkinghistory.checkTime >= ? AND checkinghistory.checkTime <= ? AND checkinghistory.vocabId = ?  GROUP BY checkinghistory.email ORDER BY checkNumber DESC ;";
 					
-					if($stmt = mysqli_prepare($link, $findVocabDetail))
+					if($stmt = mysqli_prepare($db, $findVocabDetail))
 					{
 						
 						mysqli_stmt_bind_param($stmt, "sss",  $smonethStart, $smonethEnd, $svocabID);
@@ -91,7 +91,7 @@ AND checkinghistory.checkTime >= ? AND checkinghistory.checkTime <= ? AND checki
 							AND checkinghistory.checkTime >= ? AND checkinghistory.checkTime <= ? AND checkinghistory.vocabId = ?  
 							GROUP BY member.disability";
 							
-							if($stmt2 = mysqli_prepare($link, $findVocabPieDetail))
+							if($stmt2 = mysqli_prepare($db, $findVocabPieDetail))
 							{
 						
 								mysqli_stmt_bind_param($stmt2, "sss",  $smonethStart, $smonethEnd, $svocabID);
@@ -105,7 +105,7 @@ AND checkinghistory.checkTime >= ? AND checkinghistory.checkTime <= ? AND checki
 								}
 								mysqli_stmt_close($stmt2);
 						
-								mysqli_close($link);
+								mysqli_close($db);
 							}else
 							{
 								echo "Cannot obtain the user information. Please connect to the IT department.";

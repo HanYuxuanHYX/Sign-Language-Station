@@ -37,8 +37,10 @@ function DropDown(){
 			<?php
 						session_start();
 						require_once 'connect_db.php';
-						if(!isset($_COOKIE["username"]) && !isset($_COOKIE["email"]) )
-								header("Location: login.php");
+						if(!isset($_COOKIE["username"]) && !isset($_COOKIE["email"]) ){
+							mysqli_close($db);
+							header("Location: login.php");
+						}
 							
 	
 						$findPersonalPaymentHistory = "SELECT subscriptionplan.month,   payment.paymentTime, payment.paymentPrice, creditCardInfo.cardNumber, creditCardInfo.cardType, creditCardInfo.cardOwnerName, creditCardInfo.expiryDate
@@ -48,7 +50,7 @@ function DropDown(){
 						AND payment.email = ?
 						ORDER BY paymentTime DESC;";
 						
-						if($stmt = mysqli_prepare($link, $findPersonalPaymentHistory))
+						if($stmt = mysqli_prepare($db, $findPersonalPaymentHistory))
 						{
 								mysqli_stmt_bind_param($stmt, "s",  $_COOKIE["email"]);
 								
@@ -61,7 +63,7 @@ function DropDown(){
 								}
 								mysqli_stmt_close($stmt);
 						
-								mysqli_close($link);
+								mysqli_close($db);
 						}else
 						{
 								echo "Cannot obtain the vocabulary information. Please connect to the IT department.";

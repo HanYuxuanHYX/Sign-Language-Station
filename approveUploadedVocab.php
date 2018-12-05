@@ -11,8 +11,8 @@
 	$videoSourceArray = [];
 	
 	
-	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
-	mysqli_select_db($db,"18012633x");
+	require_once 'connect_db.php';
+	mysqli_select_db($db,$dbName);
 	
 	$sql1 = $db->prepare("SELECT * FROM permission WHERE title=?");
 	$sql1->bind_param('s',$_COOKIE["title"]);

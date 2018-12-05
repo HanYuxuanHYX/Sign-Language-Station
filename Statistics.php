@@ -3,11 +3,8 @@
 		header("Location: login.php");
 		exit;
 	}
-	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
-			if(!$db){
-				 die("Connection failed: " . mysqli_connect_error());
-			}
-			mysqli_select_db($db,"18012633x");
+	require_once 'connect_db.php';
+	mysqli_select_db($db,$dbName);
 	
 	
 	$sql1 = "SELECT vocabulary.vocabName, COUNT(checkId) AS totalCheck
@@ -26,8 +23,6 @@ Order By totalSubmit DESC
 	
 	
 	mysqli_close($db);	
-	
-		
 	
 ?>
 <!doctype html>

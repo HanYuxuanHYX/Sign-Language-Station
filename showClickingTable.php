@@ -44,11 +44,11 @@
 							header("Location: login.php");
 							
 					$sql1 = "SELECT * FROM permission WHERE title='" . $_COOKIE["title"] . "'";
-					$result1 = mysqli_query($link,$sql1) or die("SQL error!<br>");
+					$result1 = mysqli_query($db,$sql1) or die("SQL error!<br>");
 					$row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC);
 	
 					if($row1["statistics"]==0){
-								mysqli_close($link);
+								mysqli_close($db);
 								echo "<script>alert('You do not have the authority to do this!');
 								window.location.href='adminFunctions.php';</script>";
 								exit;
@@ -56,7 +56,7 @@
 	
 					$findVocab = "SELECT vocabId, vocabName, checkTotal FROM vocabulary;";
 					
-					if($stmt = mysqli_prepare($link, $findVocab))
+					if($stmt = mysqli_prepare($db, $findVocab))
 					{
 						mysqli_stmt_execute($stmt);
 						
@@ -67,7 +67,7 @@
 							}
 						mysqli_stmt_close($stmt);
 						
-						mysqli_close($link);
+						mysqli_close($db);
 					}else
 					{
 						echo "Cannot obtain the vocabulary information. Please connect to the IT department.";

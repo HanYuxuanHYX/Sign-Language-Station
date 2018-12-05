@@ -2,11 +2,8 @@
 if(!isset($_COOKIE["username"])){
 		header("Location: login.php");
 		exit;
-	}
-	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
-	if(!$db){
-		 die("Connection failed: " . mysqli_connect_error());
-	}
+	}	
+	require_once 'connect_db.php';
 	mysqli_select_db($db,"18012633x");
 	
 	$sql0 = "SELECT * FROM permission 
@@ -15,6 +12,7 @@ if(!isset($_COOKIE["username"])){
 	$row0 = mysqli_fetch_array($result0, MYSQLI_ASSOC);
 	
 	if($row0["statistics"]==0){
+		mysqli_close($db);	
 		echo "<script>alert('You do not have the authority to do this!');
 		window.location.href='adminFunctions.php';</script>";
 	}

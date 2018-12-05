@@ -4,8 +4,8 @@
 		exit;
 	}
 	
-	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
-	mysqli_select_db($db,"18012633x");
+	require_once 'connect_db.php';
+	mysqli_select_db($db,$dbName);
 	$sql0 = "SELECT * FROM permission WHERE title='" . $_COOKIE["title"] . "'";
 	$result0 = mysqli_query($db,$sql0) or die("SQL error!<br>");
 	$row0 = mysqli_fetch_array($result0, MYSQLI_ASSOC);

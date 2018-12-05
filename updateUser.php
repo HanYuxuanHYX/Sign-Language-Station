@@ -2,11 +2,11 @@
 	if(!isset($_COOKIE["email"]))
 		header("Location: login.php");
 	
-	$conn = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
-	mysqli_select_db($conn,"18012633x");
+	require_once 'connect_db.php';
+	mysqli_select_db($db,$dbName);
 	
 	$sql1 = "SELECT * FROM permission WHERE title='" . $_COOKIE["title"] . "'";
-	$result1 = mysqli_query($conn,$sql1) or die("SQL error!<br>");
+	$result1 = mysqli_query($db,$sql1) or die("SQL error!<br>");
 	$row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC);	
 	if($row1["writeMember"]==0){
 		mysqli_close($db);
@@ -65,8 +65,8 @@ th{
 	  </tr>
 
 	<?php 
-	$sql = "SELECT * FROM 18012633x.member;";
-	$result = mysqli_query($conn, $sql);
+	$sql = "SELECT * FROM member;";
+	$result = mysqli_query($db, $sql);
 	if (mysqli_num_rows($result) > 0) {
     	// output data of each row
 	    while($row = mysqli_fetch_assoc($result)) {
@@ -87,7 +87,7 @@ th{
 	        </td>";
 	    }
 	}
-	mysqli_close($conn);
+	mysqli_close($db);
 	?>
 	</tr>
 	</table>

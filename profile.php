@@ -39,7 +39,7 @@ function DropDown(){
           <td><a href="changePassword.php">reset password</a></td>
         </tr>
         <tr>
-	      <td><strong>remained subscription time</strong></td>
+	      <td><strong>remained subscription time(day)</strong></td>
 	      <td><?php echo $_COOKIE["daysLeft"]?></td>
 	      <td><a href="subscriptionPlan.php">make a subscription</a></td>
 		  <td><a href='personalSubscriptionPlanHistory.php'>review subscription history</a></td>

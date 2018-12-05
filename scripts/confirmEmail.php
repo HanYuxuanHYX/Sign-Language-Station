@@ -2,8 +2,8 @@
 $email = $_GET["email"];
 $token = $_GET["token"];
 
-$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
-mysqli_select_db($db,"18012633x");
+require_once '../connect_db.php';
+mysqli_select_db($db,$dbName);
 $sql = $db->prepare("SELECT * FROM member WHERE token=? AND email=?");
 $sql->bind_param("ss",$token,$email);
 $sql->execute();

@@ -4,8 +4,8 @@
 		exit;
 	}
 	
-	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
-	mysqli_select_db($db,"18012633x");
+	require_once 'connect_db.php';
+	mysqli_select_db($db,$dbName);
 	
 	$sql1 = "SELECT * FROM permission 
 			WHERE title='" . $_COOKIE["title"] . "'";
@@ -56,7 +56,7 @@
 	
 					$findPlanRecord = "SELECT CONCAT(YEAR(paymentTime),'-',MONTH(paymentTime)) AS Month , GROUP_CONCAT(planId order by planId SEPARATOR ';' ) AS PlanIDGroup, (COUNT(planId)/COUNT(DISTINCT(planId))) AS Average FROM payment WHERE paymentTime between DATE_SUB(now(), INTERVAL 12 MONTH) and now() GROUP BY YEAR(paymentTime), MONTH(paymentTime);";
 					
-					if($stmt = mysqli_prepare($link, $findPlanRecord))
+					if($stmt = mysqli_prepare($db, $findPlanRecord))
 					{
 						mysqli_stmt_execute($stmt);
 						
@@ -67,7 +67,7 @@
 							}
 						mysqli_stmt_close($stmt);
 						
-						mysqli_close($link);
+						mysqli_close($db);
 					}else
 					{
 						echo "Cannot obtain the subscription plan information. Please connect to the IT department.";

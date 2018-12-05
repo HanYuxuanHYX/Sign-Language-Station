@@ -2,10 +2,14 @@
 	session_start();
 	require_once 'connect_db.php';
 	if(!isset($_COOKIE["username"]) && !isset($_COOKIE["email"]) )
+	{
+		mysqli_close($db);
 		header("Location: login.php");
+	}
 	
 	if(!isset($_POST["vocabId"]))
 	{
+		mysqli_close($db);
 		header("Location: showClickingTable.php");
 	}
 	
@@ -22,7 +26,7 @@
 					
 					$findVocabDetail = "SELECT CONCAT(YEAR(checkTime),'-',MONTH(checkTime)) AS Month, count(vocabId) FROM checkinghistory  WHERE vocabId = ? GROUP BY Month ;";
 					
-					if($stmt = mysqli_prepare($link, $findVocabDetail))
+					if($stmt = mysqli_prepare($db, $findVocabDetail))
 					{
 						
 						mysqli_stmt_bind_param($stmt, "s",   $_POST["vocabId"]);
@@ -36,7 +40,7 @@
 							}
 						mysqli_stmt_close($stmt);
 						
-						mysqli_close($link);
+						mysqli_close($db);
 					}else
 					{
 						echo "Cannot obtain the vocabulary information. Please connect to the IT department.";

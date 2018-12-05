@@ -1,8 +1,8 @@
 <?php
 	$daysLeft = $_POST["daysLeft"];
 	$email = $_POST["email"];
-	$db = mysqli_connect("sdmysql.comp.polyu.edu.hk","18012633x","sqgqcbvd");
-	mysqli_select_db($db,"18012633x");
+	require_once '../connect_db.php';
+	mysqli_select_db($db,$dbName);
 	echo $daysLeft;
 	$sql = $db->prepare("UPDATE member SET daysLeft=? WHERE email='$email'");
 	$sql->bind_param("s",$daysLeft);
